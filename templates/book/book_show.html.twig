@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Ebooks en promo" %}
+
+{% block body %}
+    <div class="container">
+    <h1>{{ book.title }}</h1>
+        <div class="row">
+            <div class="col-md-2">
+        Je suis le menu
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                    <img src="/uploads/{{ book.cover }}" alt="couverture de {{ book.title }}">
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <p class="font-weight-bold">{{ book.title }}</p>
+                            </div>
+                            <div class="col text-end">
+                            Fantasy
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                            Nom de l'auteur
+                            </div>
+                            <div class="col text-end">
+                            Nom de l'éditeur
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mt-4 text-justify">
+                            {{ book.description | raw }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        {{ book.user.pseudo }}
+                    </div>
+
+                    <div class="col">
+                        expire le {{ book.endDate | date('d/m/Y') }}
+                    </div>
+                    
+                    <div class="col text-end" style="font-weight:bold; color:red; font-size:">
+                        {{ book.reducePrice }} €
+                    </div>au lieu de
+                    <div class="col">
+                        <del>{{ book.normalPrice }} €</del> 
+                    </div>
+                    <div class="col text-align-left" style="font-weight:bold; color:red; font-size:">
+                        -{{ pourcent }}%
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">sur PromoSite</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        icônes partage réseaux sociaux
+                    </div>
+
+                    <div class="col">
+                        nombre de like <3
+                    </div>
+                </div>
+<hr>
+
+
+                <div class="row mt-4">
+                    <div class="col-md-2">
+                        {{ app.user.pseudo }}
+                    </div>
+                    <div class="col">
+                        {{ form_start(comment_form) }}
+
+                        {{ form_row(comment_form.content) }}
+                        
+                        {{ form_rest(comment_form) }}
+                            <button class="btn btn-primary">{{ button|default('Commenter') }}</button>
+                        {{ form_end(comment_form) }} 
+                    </div>
+                </div>
+<hr>
+                <div class="row mt-4">
+                    <div class="col-md-2">
+                        Contributeur
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col text-end">
+                            le {{ book.endDate | date('d/m/Y') }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-left">
+                                super !!!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+        
+    </div>
+
+{% endblock %}
