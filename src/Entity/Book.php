@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -83,6 +84,11 @@ class Book
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return (new Slugify())->slugify($this->title);
     }
 
     public function getIsbn(): ?string

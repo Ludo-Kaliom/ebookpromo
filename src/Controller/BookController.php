@@ -65,23 +65,23 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/book/{slug}-{id}", name="book_show", requirements={"slug": "[a-z0-9\-]*"})
+     * @Route("/book/{id}", name="book_show")
      * @return Response
      */
-    public function Book(Request $request, Book $book, string $slug): Response
+    public function Book(Request $request, Book $book, Comment $comment): Response
     {
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
 
-        if ($book->getSlug() !== $slug)
-        {
-            return $this->redirectToRoute('book_show', [
-                'id' => $book->getId(),
-                'slug' => $book->getSlug()
-            ], 301); 
-        }
+        // if ($book->getSlug() !== $slug)
+        // {
+        //     return $this->redirectToRoute('book_show', [
+        //         'id' => $book->getId(),
+        //         'slug' => $book->getSlug()
+        //     ], 301); 
+        // }
 
-        $book = $this->$book->getId();
+        // $book = $this->$book->getId();
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -92,6 +92,7 @@ class BookController extends AbstractController
 
             $comment->setUser($user);
             $comment->setBook($book);
+            $comment->setDate(new \DateTime());
             
             $this->em->persist($comment);
             $this->em->flush();
@@ -99,6 +100,7 @@ class BookController extends AbstractController
 
         return $this->render('book/book_show.html.twig', [
             'book'=> $book,
+            'comment' => $comment,
             'pourcent' => $pourcent,
             'comment_form' => $form->createView(),
         ]);

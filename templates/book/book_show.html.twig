@@ -45,7 +45,7 @@
 
                 <div class="row mt-4">
                     <div class="col">
-                        {{ book.user.pseudo }}
+                        {{ book.user.username }}
                     </div>
 
                     <div class="col">
@@ -83,7 +83,7 @@
 
                 <div class="row mt-4">
                     <div class="col-md-2">
-                        {{ app.user.pseudo }}
+                        {{ book.user.username }}
                     </div>
                     <div class="col">
                         {{ form_start(comment_form) }}
@@ -96,30 +96,33 @@
                     </div>
                 </div>
 <hr>
-                <div class="row mt-4">
-                    <div class="col-md-2">
-                        Contributeur
-                    </div>
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col text-end">
-                            le {{ book.endDate | date('d/m/Y') }}
-                            </div>
+                {% for comment in book.comments %}
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            {{ comment.user.username }}
                         </div>
 
-                        <div class="row">
-                            <div class="col text-left">
-                                super !!!
+                        <div class="col">
+                            <div class="row">
+                                <div class="col text-end">
+                                le {{ comment.date | date('d/m/Y') }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col text-left">
+                                    {{ comment.content | raw }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
 
             </div>
         
         </div>
         
     </div>
+
 
 {% endblock %}

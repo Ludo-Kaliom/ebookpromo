@@ -22,7 +22,7 @@ class Comment
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Comments')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
