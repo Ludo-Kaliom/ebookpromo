@@ -2,23 +2,22 @@
 
 namespace App\Form;
 
-use App\Entity\Author;
 use App\Entity\Book;
-use App\Entity\Category;
+use App\Entity\Author;
 use App\Entity\Publisher;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class BookType extends AbstractType
+class BooksType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -29,18 +28,8 @@ class BookType extends AbstractType
                     'placeholder' => "Titre du livre"
                 ]
             ])
-            ->add('author', EntityType::class, [
-                'class' => Author::class,
-                'label' => "Auteur",
-                'choice_label' => 'name',
-                'mapped' => false
-            ])
-            ->add('publisher', EntityType::class, [
-                'class' => Publisher::class,
-                'label' => "Editeur",
-                'choice_label' => 'name',
-                'mapped' => false
-            ])
+            ->add('authors')
+            ->add('publishers')
             ->add('isbn', TextType::class,  [
                 'label' => "ISBN",
                 'attr' => [
@@ -80,18 +69,7 @@ class BookType extends AbstractType
                 'placeholder' => "Lien vers un site de vente"
                 ]
             ])
-            ->add('categorie1', EntityType::class, [
-                'class' => Category::class,
-                'label' => "Genre principal du livre",
-                'choice_label' => 'name',
-                'mapped' => false
-            ])
-            ->add('categorie2', EntityType::class, [
-                'class' => Category::class,
-                'label' => "Sous-genre",
-                'choice_label' => 'name',
-                'mapped' => false
-            ])
+            ->add('categories')
         ;
     }
 

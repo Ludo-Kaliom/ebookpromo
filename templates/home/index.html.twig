@@ -3,6 +3,24 @@
 {% block title "Ebooks en promo" %}
 
 {% block body %}
-<h1>bienvenue sur la homepage</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+        Je suis le menu
+            </div>
+            {% for book in books %}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="/uploads/{{ book.cover }}" class="card-img-top" alt="couverture de {{ book.title }}">
+                        <div class="card-body">
+                        <p class="card-title">{{ book.reduceprice }} € au lieu de {{ book.normalprice }} €</p>
+                        <a href="{{ path('book_show', {id: book.id}) }}" class="btn btn-primary">Voir le détail</a>
+                        <p class="card-text">expire le {{ book.enddate | date('d/m/Y') }}</p>
+                        </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     
 {% endblock %}

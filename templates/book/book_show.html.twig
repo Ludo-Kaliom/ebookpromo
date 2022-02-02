@@ -3,6 +3,7 @@
 {% block title "Ebooks en promo" %}
 
 {% block body %}
+
     <div class="container">
     <h1>{{ book.title }}</h1>
         <div class="row">
@@ -21,22 +22,31 @@
                                 <p class="font-weight-bold">{{ book.title }}</p>
                             </div>
                             <div class="col text-end">
-                            Fantasy
+                            {% for category in book.categories %}
+                                {{ category.name }}
+                            {% endfor %}
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
-                            Nom de l'auteur
+                            
+                            {% for author in book.authors %}
+                                {{ author.name }}
+                            {% endfor %}
+                            
                             </div>
                             <div class="col text-end">
-                            Nom de l'éditeur
+                            {% for publisher in book.publishers %}
+                                {{ publisher.name }}
+                                
+                            {% endfor %}
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col mt-4 text-justify">
-                            {{ book.description | raw }}
+                            {{ book.description | nl2br }}
                             </div>
                         </div>
 
@@ -111,7 +121,7 @@
 
                             <div class="row">
                                 <div class="col text-left">
-                                    {{ comment.content | raw }}
+                                    {{ comment.content | nl2br }}
                                 </div>
                             </div>
                         </div>

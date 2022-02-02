@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'categories')]
     private $books;
 
     public function __construct()
@@ -83,5 +83,16 @@ class Category
         }
 
         return $this;
+    }
+
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->name;
+        // to show the id of the Category in the select
+        // return $this->id;
     }
 }

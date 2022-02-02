@@ -21,7 +21,7 @@ class Publisher
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'publishers')]
+    #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'publishers')]
     private $books;
 
     public function __construct()
@@ -83,5 +83,16 @@ class Publisher
         }
 
         return $this;
+    }
+
+    /**
+     * Generates the magic method
+     * 
+     */
+    public function __toString(){
+        // to show the name of the Category in the select
+        return $this->name;
+        // to show the id of the Category in the select
+        // return $this->id;
     }
 }

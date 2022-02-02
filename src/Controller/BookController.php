@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Entity\Comment;
+use App\Form\BooksType;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,17 +22,16 @@ class BookController extends AbstractController
     {
         $this->em = $em;
     }
-    
 
-    /**
-     * @Route("/addbook", name="addbook")
+     /**
+     * @Route("/newbook", name="newbook")
      */
-    public function addBook(Request $request): Response
+    public function newBook(Request $request): Response
     {
         $user = $this->getUser();
         $book = new Book();
         
-        $form = $this->createForm(BookType::class, $book);
+        $form = $this->createForm(BooksType::class, $book);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class BookController extends AbstractController
 
         }
 
-        return $this->render('book/addbook.html.twig', [
+        return $this->render('book/newbook.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -68,7 +68,7 @@ class BookController extends AbstractController
      * @Route("/book/{id}", name="book_show")
      * @return Response
      */
-    public function Book(Request $request, Book $book, Comment $comment): Response
+    public function Book(Request $request, Book $book): Response
     {
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
