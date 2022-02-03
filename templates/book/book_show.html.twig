@@ -5,13 +5,14 @@
 {% block body %}
 
     <div class="container">
-    <h1>{{ book.title }}</h1>
+
         <div class="row">
             <div class="col-md-2">
         Je suis le menu
             </div>
             <div class="col-md-8">
                 <div class="row">
+            <h1>{{ book.title }}</h1>
                     <div class="col-md-4">
                     <img src="/uploads/{{ book.cover }}" alt="couverture de {{ book.title }}">
                     </div>
@@ -19,28 +20,21 @@
                     <div class="col">
                         <div class="row">
                             <div class="col">
-                                <p class="font-weight-bold">{{ book.title }}</p>
+                            {{ book.authors }}
                             </div>
                             <div class="col text-end">
                             {% for category in book.categories %}
-                                {{ category.name }}
+                                {{ category.name }},
                             {% endfor %}
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col">
-                            
-                            {% for author in book.authors %}
-                                {{ author.name }}
-                            {% endfor %}
-                            
+                                {{ book.authors }}
                             </div>
                             <div class="col text-end">
-                            {% for publisher in book.publishers %}
-                                {{ publisher.name }}
-                                
-                            {% endfor %}
+                                {{ book.publisher }}
                             </div>
                         </div>
 

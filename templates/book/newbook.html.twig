@@ -33,12 +33,15 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">{{ form_row(form.publishers) }}</div>
+                <div class="col-md-6">{{ form_row(form.publisher) }}</div>
                 <div class="col-md-6">{{ form_row(form.isbn) }}</div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">{{ form_row(form.categories) }}</div>
+                <div class="col-md-6">{{ form_row(form.type) }}</div>
+                <div class="col-md-6">{{ form_row(form.categories, {
+                    label: 'Catégorie'
+                }) }}</div>
             </div>
 
             <div class="row">

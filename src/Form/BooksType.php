@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Book;
 use App\Entity\Author;
 use App\Entity\Publisher;
+use App\Repository\PublisherRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -29,7 +31,12 @@ class BooksType extends AbstractType
                 ]
             ])
             ->add('authors')
-            ->add('publishers')
+            // ->add('publishers')
+            ->add('publishers', EntityType::class, [
+                'class' => Publisher::class,
+                'choice_label' => 'name',
+                'mapped' => false
+            ])
             ->add('isbn', TextType::class,  [
                 'label' => "ISBN",
                 'attr' => [
@@ -70,6 +77,8 @@ class BooksType extends AbstractType
                 ]
             ])
             ->add('categories')
+
+            
         ;
     }
 

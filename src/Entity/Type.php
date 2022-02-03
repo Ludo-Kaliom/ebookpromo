@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AuthorRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AuthorRepository::class)]
-class Author
+#[ORM\Entity(repositoryClass: TypeRepository::class)]
+class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +16,12 @@ class Author
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private $Genre;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'authors')]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Book::class)]
     private $books;
 
     public function __construct()
@@ -34,14 +34,14 @@ class Author
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getGenre(): ?string
     {
-        return $this->name;
+        return $this->Genre;
     }
 
-    public function setName(string $name): self
+    public function setGenre(string $Genre): self
     {
-        $this->name = $name;
+        $this->Genre = $Genre;
 
         return $this;
     }
@@ -70,7 +70,7 @@ class Author
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
-            $book->addAuthor($this);
+            $book->setType($this);
         }
 
         return $this;
@@ -79,19 +79,22 @@ class Author
     public function removeBook(Book $book): self
     {
         if ($this->books->removeElement($book)) {
-            $book->removeAuthor($this);
+            // set the owning side to null (unless already changed)
+            if ($book->getType() === $this) {
+                $book->setType(null);
+            }
         }
 
         return $this;
     }
 
-    /**
+      /**
      * Generates the magic method
      * 
      */
     public function __toString(){
         // to show the name of the Category in the select
-        return $this->name;
+        return $this->Genre;
         // to show the id of the Category in the select
         // return $this->id;
     }

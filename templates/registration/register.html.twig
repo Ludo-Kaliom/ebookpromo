@@ -1,17 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row align-items-center">
+            <h1>Créer un compte utilisateur</h1>
+        </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="row">
+            <div class="col-md-6">{{ form_row(registrationForm.email) }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">{{ form_row(registrationForm.username) }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">{{ form_row(registrationForm.plainPassword) }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">{{ form_row(registrationForm.avatar) }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">{{ form_row(registrationForm.agreeTerms) }}</div>
+        </div>
+
+        {{ form_rest(registrationForm) }}
+            <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+        {{ form_end(registrationForm) }}
+        
+    </div>
 {% endblock %}

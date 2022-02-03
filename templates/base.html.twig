@@ -15,9 +15,19 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-2">Logo</div>
+                <div class="col-md-2"><img src="/images/logo.png" alt="logo"></div>
                 <div class="col-md-8">Bannière</div>
-                <div class="col-md-2">Se connecter<br>S'inscrire</div>
+                <div class="col-md-2">
+                    <div class="d-grid">
+                        {% if app.user %}
+                            <a href="{{ path('login') }}" class="btn btn-primary btn-secondary">Mon compte</a>
+                            <a href="{{ path('app_logout') }}" class="btn btn-primary btn-secondary">Me déconnecter</a>
+                        {% else %}
+                            <a href="{{ path('login') }}" class="btn btn-primary btn-secondary">Me connecter</a>
+                            <a href="{{ path('app_register') }}" class="btn btn-primary btn-secondary">M'inscrire</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             <div class="row row-col-auto">
             <div class="div"><button type="button" class="btn btn-dark">Dark</button> <button type="button" class="btn btn-dark">Dark</button> <button type="button" class="btn btn-dark">Dark</button></div>

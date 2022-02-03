@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte possédant cet email, veuillez en choisir un autre email")
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -54,10 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
     private $Comments;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: BookLike::class)]
+    private $bookLikes;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
         $this->Comments = new ArrayCollection();
+        $this->bookLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -271,5 +275,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->username;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @return Collection|BookLike[]
+     */
+    public function getBookLikes(): Collection
+    {
+        return $this->bookLikes;
+    }
+
+    public function addBookLike(BookLike $bookLike): self
+    {
+        if (!$this->bookLikes->contains($bookLike)) {
+            $this->bookLikes[] = $bookLike;
+            $bookLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookLike(BookLike $bookLike): self
+    {
+        if ($this->bookLikes->removeElement($bookLike)) {
+            // set the owning side to null (unless already changed)
+            if ($bookLike->getUser() === $this) {
+                $bookLike->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

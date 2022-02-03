@@ -46,12 +46,6 @@ class Book
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
-    private $authors;
-
-    #[ORM\ManyToMany(targetEntity: Publisher::class, inversedBy: 'books')]
-    private $publishers;
-
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'books')]
     private $categories;
 
@@ -61,12 +55,24 @@ class Book
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Comment::class, orphanRemoval: true)]
     private $comments;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $publisher;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $authors;
+
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookLike::class, orphanRemoval: true)]
+    private $bookLikes;
+
+    #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $type;
+
     public function __construct()
     {
-        $this->authors = new ArrayCollection();
-        $this->publishers = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->bookLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,54 +206,6 @@ class Book
     }
 
     /**
-     * @return Collection|Author[]
-     */
-    public function getAuthors(): Collection
-    {
-        return $this->authors;
-    }
-
-    public function addAuthor(Author $author): self
-    {
-        if (!$this->authors->contains($author)) {
-            $this->authors[] = $author;
-        }
-
-        return $this;
-    }
-
-    public function removeAuthor(Author $author): self
-    {
-        $this->authors->removeElement($author);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Publisher[]
-     */
-    public function getPublishers(): Collection
-    {
-        return $this->publishers;
-    }
-
-    public function addPublisher(Publisher $publisher): self
-    {
-        if (!$this->publishers->contains($publisher)) {
-            $this->publishers[] = $publisher;
-        }
-
-        return $this;
-    }
-
-    public function removePublisher(Publisher $publisher): self
-    {
-        $this->publishers->removeElement($publisher);
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Category[]
      */
     public function getCategories(): Collection
@@ -309,6 +267,72 @@ class Book
                 $comment->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublisher(): ?string
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(string $publisher): self
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    public function getAuthors(): ?string
+    {
+        return $this->authors;
+    }
+
+    public function setAuthors(string $authors): self
+    {
+        $this->authors = $authors;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BookLike[]
+     */
+    public function getBookLikes(): Collection
+    {
+        return $this->bookLikes;
+    }
+
+    public function addBookLike(BookLike $bookLike): self
+    {
+        if (!$this->bookLikes->contains($bookLike)) {
+            $this->bookLikes[] = $bookLike;
+            $bookLike->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookLike(BookLike $bookLike): self
+    {
+        if ($this->bookLikes->removeElement($bookLike)) {
+            // set the owning side to null (unless already changed)
+            if ($bookLike->getBook() === $this) {
+                $bookLike->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
