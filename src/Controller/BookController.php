@@ -7,6 +7,7 @@ use App\Form\BookType;
 use App\Entity\Comment;
 use App\Entity\BookLike;
 use App\Form\CommentType;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,8 +27,9 @@ class BookController extends AbstractController
      /**
      * @Route("book/newbook", name="newbook")
      */
-    public function newBook(Request $request): Response
+    public function newBook(Request $request, CategoryRepository $categoriesRepo): Response
     {
+        $categories = $categoriesRepo->findAll();
         $user = $this->getUser();
         $book = new Book();
         
@@ -60,7 +62,8 @@ class BookController extends AbstractController
         }
 
         return $this->render('book/newbook.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $categories
         ]);
     }
 
@@ -68,8 +71,9 @@ class BookController extends AbstractController
      * @Route("/book/{id}", name="book_show")
      * @return Response
      */
-    public function Book(Request $request, Book $book): Response
+    public function Book(Request $request, Book $book, CategoryRepository $categoriesRepo): Response
     {
+        $categories = $categoriesRepo->findAll();
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
 
@@ -104,6 +108,7 @@ class BookController extends AbstractController
             'comment' => $comment,
             'pourcent' => $pourcent,
             'comment_form' => $form->createView(),
+            'categories' => $categories
         ]);
     }
 }
