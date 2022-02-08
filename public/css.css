@@ -1,0 +1,66 @@
+body {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: large;
+}
+
+
+.reduceprice{
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.normalprice{
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration:line-through;
+}
+
+.card-body{
+    text-align: center;
+}
+
+.card-text{
+    font-variant-caps: small-caps;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu{
+    color: rgb(8, 1, 1);
+    font-size: larger;
+    text-align: center;
+    background-color: rgb(243, 239, 239);
+    border-radius: 10px;
+    font-variant-caps: small-caps;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+}
+
+.menuheader{
+    color: rgb(8, 1, 1);
+    font-size: normal;
+    text-align: center;
+    background-color: rgb(243, 239, 239);
+    border-radius: 10px;
+    font-variant-caps: small-caps;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.catmenu{
+    border-radius: 10px;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.catlist{
+    text-align: center;
+    background-color: #212529;
+    color: whitesmoke;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+}

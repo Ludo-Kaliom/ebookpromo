@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Ebooks en promo" %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Toutes les catégories</h1>
+        <div class="row">
+            {{ include('home/_menu.html.twig') }}
+            <div class="col-md-8">
+                <div class="row">
+                {% for category in categories %}
+                    {{ category.name }}
+                    <div class="col-md-8">
+                        Voir tous les livres en rapport avec cette catégorie
+                    </div>
+                </div>{% endfor %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}
