@@ -22,28 +22,29 @@
                     <div class="menuheader">
                         {% if app.user %}
                             <div class="menuheader">
-                                <a href="{{ path('account') }}" class="menuheader">Mon compte</a>
+                                <a href="{{ path('account') }}">Mon compte</a>
                             </div>
                             <div class="menuheader">
-                                <a href="{{ path('app_logout') }}" class="menuheader">Me déconnecter</a>
+                                <a href="{{ path('app_logout') }}">Me déconnecter</a>
                             </div>
                         {% else %}
                             <div class="menuheader">
-                                <a href="{{ path('login') }}" class="menuheader">Me connecter</a>
+                                <a href="{{ path('login') }}">Me connecter</a>
                             </div>
                             <div class="menuheader">
-                                <a href="{{ path('app_register') }}" class="menuheader">M'inscrire</a>
+                                <a href="{{ path('app_register') }}">M'inscrire</a>
                             </div>
                         {% endif %}
+                            
                     </div>
                 </div>
             </div>
             <div class="row row-col-auto">
-            <div class="catmenu">
-                {% for category in categories %}
-                    <a href="{{ path('login') }}" class="catlist">{{ category.name }}</a>
-                {% endfor %}
-        </div>
+                <div class="catmenu">
+                    {% for category in categories %}
+                        <a href="{{ path('login') }}" class="catlist">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 

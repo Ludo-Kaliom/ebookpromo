@@ -8,122 +8,123 @@
 
         <div class="row">
             {{ include('home/_menu.html.twig') }}
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="row">
-            <h1>{{ book.title }}</h1>
-                    <div class="col-md-4">
-                    <img src="/uploads/{{ book.cover }}" alt="couverture de {{ book.title }}">
+                <h1>{{ book.title }}</h1>
+                    <div id="center" class="col-md-4">
+                        <img src="/uploads/{{ book.cover }}" alt="couverture de {{ book.title }}">
                     </div>
 
-                    <div class="col">
+                    <div class="col-md-8">
                         <div class="row">
-                            <div class="col">
-                            {{ book.authors }}
+                            <div id="username" class="col">
+                                {% for category in book.categories %}
+                                    {{ category.name }},
+                                {% endfor %}
                             </div>
-                            <div class="col text-end">
-                            {% for category in book.categories %}
-                                {{ category.name }},
-                            {% endfor %}
+                            <div id="username" class="col text-end">
+                                {{ book.type }}
                             </div>
                         </div>
 
                         <div class="row mt-4">
-                            <div class="col">
+                            <div id="username" class="col">
                                 {{ book.authors }}
                             </div>
-                            <div class="col text-end">
+                            <div id="username" class="col text-end">
                                 {{ book.publisher }}
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col mt-4 text-justify">
-                            {{ book.description | nl2br }}
+                            <div id="description" class="col mt-4">
+                                {{ book.description | nl2br }}
                             </div>
                         </div>
-
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div id="bookcontributor" class="col-md-4">
+                        <img id="avatar" src="{{ book.user.avatar}}" alt="avatar de {{ book.user.username }}"></br>
+                        <span id="username">{{ book.user.username }}</span>
+                        
+                    </div>
+                    
+                    <div id="info" class="col">
+                        <span class="reduceprice">{{ book.reducePrice }} €</span> au lieu de <span class="normalprice">{{ book.normalPrice }} € </span></br>
+                        <span class="reduceprice">{{ pourcent }}%</span> de réduction
+                    </div>
+                   
+                    <div id="info" class="col">
+                        <div class="row">
+                            <div id="center" class="col">expire le {{ book.endDate | date('d/m/Y') }}</br>
+                                <div class="linkseller">
+                                    <a id="link" href="{{ path('app_logout') }}">J'en profite !</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col">
-                        {{ book.user.username }}
-                    </div>
+                <div id="center" class="row mt-4">
+                    {{ include('book/_social_networks.html.twig') }}
+                </div>
+            </div>
+            <hr>
+        </div>
+                {# poster un commentaire #}
+        {% if app.user %}
+        <div class="row">
+            <div class="col-md-3 d-grid">
+            </div>
+            <div id="center" class="col-md-2">
+                <img id="avatar" src="/uploads/{{ app.user.avatar}}" alt="avatar de {{ app.user.username }}"></br>
+                {{ app.user.username }}
+            </div>
+            <div id="commentform" class="col">
+                {{ form_start(comment_form) }}
 
-                    <div class="col">
-                        expire le {{ book.endDate | date('d/m/Y') }}
+                {{ form_row(comment_form.content) }}
+                
+                {{ form_rest(comment_form) }}
+                    <div id="button">
+                        <button class="btn btn-primary">{{ button|default('Commenter') }}</button>
                     </div>
+                {{ form_end(comment_form) }}
+            </div>
+        </div>
+        {% endif %}
+
+            {# afficher un commentaire #}
+        <div class="row">
+            {% for comment in book.comments %}
+                <div class="row mt-4">
+            <h2>Commentaires</h2>
+                    <div class="col-md-3 d-grid">
                     
-                    <div class="col text-end" style="font-weight:bold; color:red; font-size:">
-                        {{ book.reducePrice }} €
-                    </div>au lieu de
-                    <div class="col">
-                        <del>{{ book.normalPrice }} €</del> 
                     </div>
-                    <div class="col text-align-left" style="font-weight:bold; color:red; font-size:">
-                        -{{ pourcent }}%
+                    <div id="center" class="col-md-2">
+                        <img id="avatar" src="{{ comment.user.avatar}}" alt="avatar de {{ comment.user.username }}"></br>
+                        {{ comment.user.username }}
                     </div>
 
                     <div class="col">
                         <div class="row">
-                            <div class="col">sur PromoSite</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col">
-                        icônes partage réseaux sociaux
-                    </div>
-
-                    <div class="col">
-                        nombre de like <3
-                    </div>
-                </div>
-<hr>
-
-
-                <div class="row mt-4">
-                    <div class="col-md-2">
-                        {{ book.user.username }}
-                    </div>
-                    <div class="col">
-                        {{ form_start(comment_form) }}
-
-                        {{ form_row(comment_form.content) }}
-                        
-                        {{ form_rest(comment_form) }}
-                            <button class="btn btn-primary">{{ button|default('Commenter') }}</button>
-                        {{ form_end(comment_form) }} 
-                    </div>
-                </div>
-<hr>
-                {% for comment in book.comments %}
-                    <div class="row mt-4">
-                        <div class="col-md-2">
-                            {{ comment.user.username }}
-                        </div>
-
-                        <div class="col">
-                            <div class="row">
-                                <div class="col text-end">
-                                le {{ comment.date | date('d/m/Y') }}
-                                </div>
+                            <div class="col text-end">
+                            le {{ comment.date | date('d/m/Y') }}
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col text-left">
-                                    {{ comment.content | nl2br }}
-                                </div>
+                        <div class="row">
+                            <div id="commenttext" class="col">
+                                {{ comment.content | nl2br }}
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-
-            </div>
-        
+                </div>
+            {% endfor %}
         </div>
-        
     </div>
 
 

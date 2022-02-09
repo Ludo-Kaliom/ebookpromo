@@ -14,7 +14,9 @@
 
                         <p class="card-title"><span class="reduceprice">{{ book.reduceprice }} €</span> au lieu de <span class="normalprice">{{ book.normalprice }} €</span></p>
 
-                        <a href="{{ path('book_show', {id: book.id}) }}" class="btn btn-danger btn-lg">En savoir plus</a>
+                        <div class="booklink">
+                            <a id="link" href="{{ path('book_show', {id: book.id}) }}">En savoir plus</a>
+                        </div>
 
                         <p class="card-text">expire le {{ book.enddate | date('d/m/Y') }}</p>
                         </div>

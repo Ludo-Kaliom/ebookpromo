@@ -3,6 +3,19 @@ body {
     font-size: large;
 }
 
+h2{
+    text-align: center;
+}
+
+a{
+    font-size: larger;
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+}
+a:hover{
+    color: black;
+}
 
 .reduceprice{
     color: red;
@@ -16,6 +29,10 @@ body {
     text-decoration:line-through;
 }
 
+.card{
+    margin-bottom: 15px;
+}
+
 .card-body{
     text-align: center;
 }
@@ -24,6 +41,24 @@ body {
     font-variant-caps: small-caps;
     font-size: 20px;
     font-weight: bold;
+}
+
+.booklink{
+    background-color: red;
+    color: whitesmoke;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#link{
+    color:whitesmoke;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.booklink:hover{
+    background-color: rgb(245, 94, 94);
 }
 
 .menu{
@@ -38,6 +73,10 @@ body {
     padding-top: 15px;
 }
 
+.menu:hover{
+    background-color: rgb(199, 188, 188);
+}
+
 .menuheader{
     color: rgb(8, 1, 1);
     font-size: normal;
@@ -45,9 +84,13 @@ body {
     background-color: rgb(243, 239, 239);
     border-radius: 10px;
     font-variant-caps: small-caps;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 5px;
 }
+
+.menuheader:hover{
+    background-color: rgb(199, 188, 188);
+}
+
 
 .catmenu{
     border-radius: 10px;
@@ -63,4 +106,74 @@ body {
     padding-left: 10px;
     padding-bottom: 10px;
     border-radius: 20px;
+}
+
+.catlist:hover{
+    background-color: #4c5157;
+}
+
+.linkseller{
+    color: rgb(8, 1, 1);
+    font-size: normal;
+    text-align: center;
+    background-color: red;
+    border-radius: 10px;
+    font-variant-caps: small-caps;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.linkseller:hover{
+    background-color: rgb(245, 94, 94);
+}
+
+#info{
+    text-align: center;
+    margin:auto;
+}
+
+#username{
+    font-weight: bold;
+}
+
+#center{
+    text-align: center;
+    font-weight: bold;
+}
+
+#button{
+    text-align: end;
+}
+
+#commenttext{
+    text-align: justify;
+}
+
+#description{
+    text-align: justify;
+}
+
+#bookcontributor{
+    font-weight: bold;
+    text-align: center;
+}
+
+#avatar{
+    max-width: 50%;
+	height: auto;
+}
+
+#commentform{
+    margin-top: 20px;
+}
+
+#border{
+    border: solid 1px;
+}
+
+#margin{
+    margin:auto;
 }

@@ -4,34 +4,26 @@
 
 {% block body %}
     <div class="container">
-        <div class="row align-items-center">
+        <div id="margin" class="col-md-6">
             <h1>Créer un compte utilisateur</h1>
         </div>
 
         {{ form_start(registrationForm) }}
 
-        <div class="row">
-            <div class="col-md-6">{{ form_row(registrationForm.email) }}</div>
-        </div>
+        <div id="margin" class="col-md-6">{{ form_row(registrationForm.email) }}</div>
 
-        <div class="row">
-            <div class="col-md-6">{{ form_row(registrationForm.username) }}</div>
-        </div>
+        <div id="margin" class="col-md-6">{{ form_row(registrationForm.username) }}</div>
 
-        <div class="row">
-            <div class="col-md-6">{{ form_row(registrationForm.plainPassword) }}</div>
-        </div>
+        <div id="margin" class="col-md-6">{{ form_row(registrationForm.plainPassword) }}</div>
 
-        <div class="row">
-            <div class="col-md-6">{{ form_row(registrationForm.avatar) }}</div>
-        </div>
+        <div id="margin" class="col-md-6">{{ form_row(registrationForm.avatar) }}</div>
 
-        <div class="row">
-            <div class="col-md-6">{{ form_row(registrationForm.agreeTerms) }}</div>
-        </div>
+        <div id="margin" class="col-md-6">{{ form_row(registrationForm.agreeTerms) }}</div>
 
         {{ form_rest(registrationForm) }}
+        <div id="margin" class="col-md-6">
             <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+        </div>
         {{ form_end(registrationForm) }}
         
     </div>
