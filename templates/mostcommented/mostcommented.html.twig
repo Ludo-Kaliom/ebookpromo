@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Ebooks en promo" %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+            {{ include('home/_menu.html.twig') }}
+            <div class="col-md-9">
+                {# {% for type in types %}
+                <h1>{{ type.genre }}</h1>
+                <a href="{{ path('type_show',{'id': type.id}) }}">Voir tous les ebooks référencés dans cette catégorie</a>
+                    
+            {% endfor %} #}
+            </div>
+        </div>
+
+{% endblock %}

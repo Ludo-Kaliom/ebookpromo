@@ -55,6 +55,10 @@ class BookController extends AbstractController
             }
         
         $book->setUser($user);
+
+        $total = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
+        
+        $book->setTotalprice($total);
         
         $this->em->persist($book);
         $this->em->flush();
@@ -71,9 +75,9 @@ class BookController extends AbstractController
      * @Route("/book/{id}", name="book_show")
      * @return Response
      */
-    public function Book(Request $request, Book $book, CategoryRepository $categoriesRepo): Response
+    public function Book(Request $request, Book $book, CategoryRepository $categoryRepository): Response
     {
-        $categories = $categoriesRepo->findAll();
+        $categories = $categoryRepository->findAll();
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
 

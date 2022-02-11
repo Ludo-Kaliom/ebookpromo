@@ -46,9 +46,6 @@ class Book
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'books')]
-    private $categories;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'books')]
     private $user;
 
@@ -68,9 +65,19 @@ class Book
     #[ORM\JoinColumn(nullable: false)]
     private $type;
 
+    #[ORM\Column(type: 'integer')]
+    private $totalprice;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $category;
+
+    #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $subcategory;
+
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->bookLikes = new ArrayCollection();
     }
@@ -205,30 +212,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        $this->categories->removeElement($category);
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -333,6 +316,42 @@ class Book
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTotalprice(): ?float
+    {
+        return $this->totalprice;
+    }
+
+    public function setTotalprice(float $totalprice): self
+    {
+        $this->totalprice = $totalprice;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSubcategory(): ?Subcategory
+    {
+        return $this->subcategory;
+    }
+
+    public function setSubcategory(?Subcategory $subcategory): self
+    {
+        $this->subcategory = $subcategory;
 
         return $this;
     }

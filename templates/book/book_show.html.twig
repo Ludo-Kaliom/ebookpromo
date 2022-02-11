@@ -18,9 +18,9 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div id="username" class="col">
-                                {% for category in book.categories %}
-                                    {{ category.name }},
-                                {% endfor %}
+                                
+                                    {{ book.category.name }},
+                                
                             </div>
                             <div id="username" class="col text-end">
                                 {{ book.type }}

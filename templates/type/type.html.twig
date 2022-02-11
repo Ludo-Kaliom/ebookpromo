@@ -9,11 +9,9 @@
         <div class="row">
             {{ include('home/_menu.html.twig') }}
             <div class="col-md-9">
-                <h1>Toutes les catégories de livres</h1>
-                {% for category in categories %}
-                <h3>{{ category.name }}</h3>
-                <a href="{{ path('category_show',{'id': category.id}) }}">
-               Livres référencés dans cette catégorie</a>
+                {% for type in types %}
+                <h1>{{ type.genre }}</h1>
+                <a href="{{ path('type_show',{'id': type.id}) }}">Voir tous les ebooks référencés dans cette catégorie</a>
                     
             {% endfor %}
             </div>

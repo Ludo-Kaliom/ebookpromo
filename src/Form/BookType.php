@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Subcategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -64,7 +65,8 @@ class BookType extends AbstractType
                 'placeholder' => "Lien vers un site de vente"
             ]
         ])
-        ->add('categories')
+        ->add('category')
+        ->add('subcategory')
         ->add('type')
         ->add('publisher', TextType::class, [
             'label' => "Editeur",

@@ -38,12 +38,19 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">{{ form_row(form.type, {
-                    label: 'Genre'
-                }) }}</div>
-                <div class="col-md-6">{{ form_row(form.categories, {
-                    label: 'Catégorie'
-                }) }}</div>
+                <div class="col-md-4">{{ form_row(form.type, {
+                    label: 'Type de livres'
+                }) }}
+                </div>
+                <div class="col-md-4">{{ form_row(form.category, {
+                    label: 'Catégorie principale'
+                }) }}
+                </div>
+
+                <div class="col-md-4">{{ form_row(form.subcategory, {
+                    label: 'Sous-catégorie'
+                }) }}
+                </div>
             </div>
 
             <div class="row">

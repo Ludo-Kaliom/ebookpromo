@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\SubcategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Entity(repositoryClass: SubcategoryRepository::class)]
+class Subcategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Book::class)]
+    #[ORM\OneToMany(mappedBy: 'subcategory', targetEntity: Book::class)]
     private $books;
 
     public function __construct()
@@ -70,7 +70,7 @@ class Category
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
-            $book->setCategory($this);
+            $book->setSubcategory($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class Category
     {
         if ($this->books->removeElement($book)) {
             // set the owning side to null (unless already changed)
-            if ($book->getCategory() === $this) {
-                $book->setCategory(null);
+            if ($book->getSubcategory() === $this) {
+                $book->setSubcategory(null);
             }
         }
 
@@ -98,5 +98,4 @@ class Category
         // to show the id of the Category in the select
         // return $this->id;
     }
-
 }
