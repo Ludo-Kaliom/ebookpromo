@@ -1,0 +1,17 @@
+{% for book in books %}
+    <div class="col-md-3">
+        <div class="card"">
+                <img src="/uploads/{{ book.cover }}" class="card-img-top" alt="couverture de {{ book.title }}">
+            <div class="card-body d-grid gap-2">
+
+                <p class="card-title"><span class="reduceprice">{{ book.reduceprice }} €</span> au lieu de <span class="normalprice">{{ book.normalprice }} €</span></p>
+
+                    <div class="booklink">
+                        <a id="link" href="{{ path('book_show', {'id': book.id}) }}">En savoir plus</a>
+                    </div>
+
+                <p class="card-text">expire le {{ book.enddate | date('d/m/Y') }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

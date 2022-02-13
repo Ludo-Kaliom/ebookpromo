@@ -16,6 +16,8 @@ class MostcommentedController extends AbstractController
     public function mostcommented(CategoryRepository $categoryRepository, CommentRepository $commentRepository): Response
     {
         $categories = $categoryRepository->findAll();
+        $comment = $commentRepository->findMostCommented();
+        dd($comment);
 
         return $this->render('mostcommented/mostcommented.html.twig', [
             'controller_name' => 'MostcommentedController',

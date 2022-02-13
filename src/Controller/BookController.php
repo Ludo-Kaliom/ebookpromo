@@ -82,6 +82,7 @@ class BookController extends AbstractController
         $user = $this->getUser();
 
 
+
         // if ($book->getSlug() !== $slug)
         // {
         //     return $this->redirectToRoute('book_show', [
