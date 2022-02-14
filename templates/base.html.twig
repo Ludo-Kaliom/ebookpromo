@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Ebooks en promo{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %} - Imaginaire pas cher</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         <link rel="stylesheet" type="text/css" href="/css.css" />
         {% block stylesheets %}
@@ -13,48 +13,13 @@
             {# {{ encore_entry_script_tags('app') }} #}
         {% endblock %}
     </head>
+        {{ include('partials/_header.html.twig') }}
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2"><img src="/images/logo.png" alt="logo"></div>
-                <div class="col-md-8">Bannière</div>
-                <div class="col-md-2">
-                    <div class="menuheader">
-                        {% if app.user %}
-                            <div class="menuheader">
-                                <a href="{{ path('account') }}">Mon compte</a>
-                            </div>
-                            <div class="menuheader">
-                                <a href="{{ path('app_logout') }}">Me déconnecter</a>
-                            </div>
-                        {% else %}
-                            <div class="menuheader">
-                                <a href="{{ path('login') }}">Me connecter</a>
-                            </div>
-                            <div class="menuheader">
-                                <a href="{{ path('app_register') }}">M'inscrire</a>
-                            </div>
-                        {% endif %}
-                            
-                    </div>
-                </div>
-            </div>
-            <div class="row row-col-auto">
-                <div class="catmenu">
-                    {% for category in categories %}
-                        <a href="{{ path('login') }}" class="catlist">{{ category.name }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
-            </ol>
-            </nav>
-        </div>
+       
         {% block body %}{% endblock %}
+        
+        {{ include('partials/_footer.html.twig') }}
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Ebooks en promo" %}
+{% block title "Toutes les catégories des livres numériques" %}
 
 {% block body %}
 
     <div class="container">
 
         <div class="row">
-            {{ include('home/_menu.html.twig') }}
+            {{ include('partials/_menu.html.twig') }}
             <div class="col-md-9">
                 <h1>Toutes les catégories de livres</h1>
                 {% for category in categories %}
                 <h3>{{ category.name }}</h3>
-                <a href="{{ path('category_show',{'id': category.id}) }}">
+                <a id='listlink' href="{{ path('category_show',{id: category.id, slug: category.slug}) }}">
                Livres référencés dans cette catégorie</a>
                     
             {% endfor %}

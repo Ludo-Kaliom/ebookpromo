@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"><img src="/images/logo.png" alt="logo"></div>
+        <div class="col-md-8">Bannière</div>
+        <div class="col-md-2">
+            <div class="menuheader">
+                {% if app.user %}
+                    <div class="menuheader">
+                        <a href="{{ path('account') }}">Mon compte</a>
+                    </div>
+                    <div class="menuheader">
+                        <a href="{{ path('app_logout') }}">Me déconnecter</a>
+                    </div>
+                {% else %}
+                    <div class="menuheader">
+                        <a href="{{ path('login') }}">Me connecter</a>
+                    </div>
+                    <div class="menuheader">
+                        <a href="{{ path('app_register') }}">M'inscrire</a>
+                    </div>
+                {% endif %}
+                    
+            </div>
+        </div>
+    </div>
+    <div id='listType' class="row">
+        <div>
+            {% for type in types %}
+                <a id='listLinkType' href="{{ path('type_show',{id: type.id, slug: type.slug}) }}">{{ type.genre }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+    </nav>
+</div>

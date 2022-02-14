@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-     public function index(AuthenticationUtils $authenticationUtils, CategoryRepository $categoriesRepo): Response
+     public function index(AuthenticationUtils $authenticationUtils, TypeRepository $typeRepository): Response
     {
          // get the login error if there is one
          $error = $authenticationUtils->getLastAuthenticationError();
@@ -18,12 +19,12 @@ class LoginController extends AbstractController
          // last username entered by the user
          $lastUsername = $authenticationUtils->getLastUsername();
 
-         $categories = $categoriesRepo->findAll();
+         $types = $typeRepository->findAll();
 
         return $this->render('user/login.html.twig', [
              'last_username' => $lastUsername,
              'error'         => $error,
-             'categories' => $categories
+             'types' => $types
         ]);
     }
 }

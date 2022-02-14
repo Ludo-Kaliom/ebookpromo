@@ -7,6 +7,7 @@ use App\Form\BookType;
 use App\Entity\Comment;
 use App\Entity\BookLike;
 use App\Form\CommentType;
+use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,9 +28,9 @@ class BookController extends AbstractController
      /**
      * @Route("book/newbook", name="newbook")
      */
-    public function newBook(Request $request, CategoryRepository $categoriesRepo): Response
+    public function newBook(Request $request, TypeRepository $typeRepository): Response
     {
-        $categories = $categoriesRepo->findAll();
+        $types = $typeRepository->findAll();
         $user = $this->getUser();
         $book = new Book();
         
@@ -67,31 +68,27 @@ class BookController extends AbstractController
 
         return $this->render('book/newbook.html.twig', [
             'form' => $form->createView(),
-            'categories' => $categories
+            'types' => $types
         ]);
     }
 
     /**
-     * @Route("/book/{id}", name="book_show")
+     * @Route("/book/{slug}-{id}", name="book_show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function Book(Request $request, Book $book, CategoryRepository $categoryRepository): Response
+    public function Book(Request $request, Book $book, TypeRepository $typeRepository, string $slug): Response
     {
-        $categories = $categoryRepository->findAll();
+        $types = $typeRepository->findAll();
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
 
-
-
-        // if ($book->getSlug() !== $slug)
-        // {
-        //     return $this->redirectToRoute('book_show', [
-        //         'id' => $book->getId(),
-        //         'slug' => $book->getSlug()
-        //     ], 301); 
-        // }
-
-        // $book = $this->$book->getId();
+        if ($book->getSlug() !== $slug)
+        {
+            return $this->redirectToRoute('book_show', [
+                'id' => $book->getId(),
+                'slug' => $book->getSlug()
+            ], 301); 
+        }
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -113,7 +110,7 @@ class BookController extends AbstractController
             'comment' => $comment,
             'pourcent' => $pourcent,
             'comment_form' => $form->createView(),
-            'categories' => $categories
+            'types' => $types
         ]);
     }
 }

@@ -1,6 +1,13 @@
 body {
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     font-size: large;
+    background-color: rgb(17, 16, 16);
+    color:whitesmoke;
+}
+
+h1{
+    text-align: center;
+    font-variant-caps: small-caps;
 }
 
 h2{
@@ -9,12 +16,23 @@ h2{
 
 a{
     font-size: larger;
-    color: black;
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    padding: 15px;
 }
+
 a:hover{
     color: black;
+}
+
+#listlink{
+    font-size: larger;
+    color: rgb(184, 153, 153);
+    text-decoration: none;
+    /* padding: 15px; */
+}
+
+#listlink:hover{
+    color: whitesmoke;
 }
 
 .reduceprice{
@@ -35,6 +53,7 @@ a:hover{
 
 .card-body{
     text-align: center;
+    background-color: rgb(34, 32, 32);
 }
 
 .card-text{
@@ -43,8 +62,13 @@ a:hover{
     font-weight: bold;
 }
 
+#linkcard{
+    color: rgb(161, 152, 152);
+    font-size: large;
+}
+
 .booklink{
-    background-color: red;
+    background-color: rgb(168, 13, 13);
     color: whitesmoke;
     border-radius: 10px;
     padding-top: 15px;
@@ -58,65 +82,80 @@ a:hover{
 }
 
 .booklink:hover{
-    background-color: rgb(245, 94, 94);
+    background-color: rgb(151, 87, 87);
 }
 
 .menu{
     color: rgb(8, 1, 1);
     font-size: larger;
     text-align: center;
-    background-color: rgb(243, 239, 239);
-    border-radius: 10px;
+    background-color: rgb(199, 188, 188);
+    border-radius: 25px;
     font-variant-caps: small-caps;
-    margin-top: 15px;
     margin-bottom: 15px;
-    padding-top: 15px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .menu:hover{
+    background-color: rgb(243, 239, 239);
+}
+
+#menu{
+    color: rgb(8, 1, 1);
+    font-size: larger;
+    text-align: center;
     background-color: rgb(199, 188, 188);
+    border-radius: 15px;
+    font-variant-caps: small-caps;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#menu:hover{
+    background-color: rgb(243, 239, 239);
 }
 
 .menuheader{
     color: rgb(8, 1, 1);
     font-size: normal;
     text-align: center;
-    background-color: rgb(243, 239, 239);
+    background-color: rgb(199, 188, 188);
     border-radius: 10px;
     font-variant-caps: small-caps;
     margin-top: 5px;
 }
 
 .menuheader:hover{
+    background-color: rgb(243, 239, 239);
+}
+
+#listType{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+#listLinkType{
+    color: rgb(8, 1, 1);
+    font-size: 1em;
+    text-align: center;
     background-color: rgb(199, 188, 188);
+    border-radius: 15px;
+    font-variant-caps: small-caps;
+    padding: 15px;
 }
 
-
-.catmenu{
-    border-radius: 10px;
-    text-align: center;
-    background-color: whitesmoke;
-}
-
-.catlist{
-    text-align: center;
-    background-color: #212529;
-    color: whitesmoke;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    border-radius: 20px;
-}
-
-.catlist:hover{
-    background-color: #4c5157;
+#listLinkType:hover{
+    background-color: rgb(243, 239, 239);
 }
 
 .linkseller{
     color: rgb(8, 1, 1);
     font-size: normal;
     text-align: center;
-    background-color: red;
+    background-color: rgb(168, 13, 13);
     border-radius: 10px;
     font-variant-caps: small-caps;
     margin-top: 5px;
@@ -127,7 +166,7 @@ a:hover{
 }
 
 .linkseller:hover{
-    background-color: rgb(245, 94, 94);
+    background-color: rgb(151, 87, 87);
 }
 
 #info{

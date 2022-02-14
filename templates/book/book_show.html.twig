@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Ebooks en promo" %}
+{% block title book.title %}
 
 {% block body %}
 
     <div class="container">
 
         <div class="row">
-            {{ include('home/_menu.html.twig') }}
+            {{ include('partials/_menu.html.twig') }}
             <div class="col-md-9">
                 <div class="row">
                 <h1>{{ book.title }}</h1>
@@ -17,13 +17,11 @@
 
                     <div class="col-md-8">
                         <div class="row">
-                            <div id="username" class="col">
-                                
-                                    {{ book.category.name }},
-                                
+                            <div class="col">
+                                <a id='listlink' href="{{ path('category_show', {id: book.category.id, slug: book.category.name }) }}">{{ book.category.name }}</a> | {{ book.subcategory.name }}
                             </div>
-                            <div id="username" class="col text-end">
-                                {{ book.type }}
+                            <div class="col text-end">
+                                <a id='listlink' href="{{ path('type') }}">{{ book.type }}</a>
                             </div>
                         </div>
 
@@ -69,10 +67,10 @@
 
                 {# Réseaux sociaux et likes #}
                 <div id="center" class="row mt-4">
-                    {{ include('book/_social_networks.html.twig') }}
+                    {{ include('partials/_social_networks.html.twig') }}
                 </div>
             </div>
-            <hr>
+
         </div>
                 {# poster un commentaire #}
         {% if app.user %}
@@ -99,9 +97,9 @@
 
             {# afficher un commentaire #}
         <div class="row">
+            <h2>Commentaires</h2>
             {% for comment in book.comments %}
                 <div class="row mt-4">
-            <h2>Commentaires</h2>
                     <div class="col-md-3 d-grid">
                     
                     </div>

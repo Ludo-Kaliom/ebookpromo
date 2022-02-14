@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Ebooks en promo" %}
+{% block title type.genre %}
 
 {% block body %}
     <div class="container">
         <div class="row">
-            {{ include('home/_menu.html.twig') }}
-            {{ include('home/_listbooks.html.twig') }}
+            <h1>Tous les livres disponibles dans de type {{ type.genre }}</h1>
+            {{ include('partials/_menu.html.twig') }}
+            {{ include('partials/_listbooks.html.twig') }}
         </div>
     </div>
     

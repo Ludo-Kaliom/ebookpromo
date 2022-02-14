@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Ebooks en promo" %}
+{% block title "Tous les genres d'ebooks" %}
 
 {% block body %}
 
     <div class="container">
 
         <div class="row">
-            {{ include('home/_menu.html.twig') }}
+            <h1>Toutes les genres de livres</h1>
+            {{ include('partials/_menu.html.twig') }}
             <div class="col-md-9">
                 {% for type in types %}
-                <h1>{{ type.genre }}</h1>
-                <a href="{{ path('type_show',{'id': type.id}) }}">Voir tous les ebooks référencés dans cette catégorie</a>
+                <h3>{{ type.genre }}</h3>
+                <a id="listlink" href="{{ path('type_show', {id: type.id, slug: type.slug}) }}">Voir tous les ebooks référencés dans cette catégorie</a>
                     
                 {% endfor %}
             </div>

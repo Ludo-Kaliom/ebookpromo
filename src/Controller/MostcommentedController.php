@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Repository\TypeRepository;
 use App\Repository\CommentRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,15 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MostcommentedController extends AbstractController
 {
     #[Route('/mostcommented', name: 'mostcommented')]
-    public function mostcommented(CategoryRepository $categoryRepository, CommentRepository $commentRepository): Response
+    public function mostcommented(TypeRepository $typeRepository, CommentRepository $commentRepository): Response
     {
-        $categories = $categoryRepository->findAll();
+        $types = $$typeRepository->findAll();
         $comment = $commentRepository->findMostCommented();
         dd($comment);
 
         return $this->render('mostcommented/mostcommented.html.twig', [
             'controller_name' => 'MostcommentedController',
-            'categories' => $categories,
+            'types' => $types,
         ]);
     }
 }

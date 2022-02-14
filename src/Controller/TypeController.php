@@ -21,30 +21,40 @@ class TypeController extends AbstractController
 
 
     #[Route('/type', name: 'type')]
-    public function type(TypeRepository $typeRepository, CategoryRepository $categoryRepository): Response
+    public function type(TypeRepository $typeRepository): Response
     {
         $types = $typeRepository->findAll();
-        $categories = $categoryRepository->findAll();
 
         return $this->render('type/type.html.twig', [
             'controller_name' => 'TypeController',
             'types' => $types,
-            'categories' => $categories,
         ]);
     }
 
-    #[Route('/type/{id}', name: 'type_show')]
-    public function show_type(Type $type, CategoryRepository $categoryRepository): Response
+    /**
+     * @Route("/type/{slug}-{id}", name="type_show", requirements={"slug": "[a-z0-9\-]*"})
+     * @return Response
+     */
+    public function show_type(Type $type, TypeRepository $typeRepository, string $slug): Response
     {
         $id = $type->getId();
         $books = $type->getBooks($id);
 
-        $categories = $categoryRepository->findAll();
+        $types = $typeRepository->findAll();
+
+        if ($type->getSlug() !== $slug)
+        {
+            return $this->redirectToRoute('type_show', [
+                'id' => $type->getId(),
+                'slug' => $type->getSlug()
+            ], 301); 
+        }
 
         return $this->render('type/type_show.html.twig', [
             'controller_name' => 'TypeController',
-            'categories' => $categories,
+            'types' => $types,
             'books' => $books,
+            'type' => $type
         ]);
     }
 }

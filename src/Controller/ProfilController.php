@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,13 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfilController extends AbstractController
 {
     #[Route('/user/account', name: 'account')]
-    public function index(CategoryRepository $categoriesRepo): Response
+    public function index(TypeRepository $typeRepository): Response
     {
-        $categories = $categoriesRepo->findAll();
+        $types = $typeRepository->findAll();
 
         return $this->render('user/account.html.twig', [
             'controller_name' => 'ProfilController',
-            'categories' => $categories
+            'types' => $types
         ]);
     }
 }

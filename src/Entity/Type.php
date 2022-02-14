@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TypeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
@@ -44,6 +45,11 @@ class Type
         $this->Genre = $Genre;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return (new Slugify())->slugify($this->Genre);
     }
 
     public function getStatus(): ?bool

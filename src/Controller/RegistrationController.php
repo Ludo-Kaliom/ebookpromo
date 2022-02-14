@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +17,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $categoriesRepo): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TypeRepository $typeRepository): Response
     {
         $user = new User();
-        $categories = $categoriesRepo->findAll();
+        $types = $typeRepository->findAll();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -57,7 +58,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'categories' => $categories
+            'types' => $types
         ]);
     }
 }
