@@ -1,20 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Les ebooks les plus commentés' %}
+{% block title "Les ebooks les plus commentés" %}
 
 {% block body %}
-
     <div class="container">
-
         <div class="row">
+            <h1>Les meilleures promotions</h1>
             {{ include('partials/_menu.html.twig') }}
-            <div class="col-md-9">
-                {# {% for type in types %}
-                <h1>{{ type.genre }}</h1>
-                <a href="{{ path('type_show',{'id': type.id}) }}">Voir tous les ebooks référencés dans cette catégorie</a>
-                    
-            {% endfor %} #}
-            </div>
+            {{ include('partials/_listbooks.html.twig') }}
         </div>
-
+    </div>
+    
 {% endblock %}
+

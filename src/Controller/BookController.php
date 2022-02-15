@@ -81,6 +81,7 @@ class BookController extends AbstractController
         $types = $typeRepository->findAll();
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
+        $nbcomments = $book->getNbcomments();
 
         if ($book->getSlug() !== $slug)
         {
@@ -102,6 +103,13 @@ class BookController extends AbstractController
             $comment->setDate(new \DateTime());
             
             $this->em->persist($comment);
+            $this->em->flush();
+
+            $totalnbcomments = $nbcomments +1;
+
+            $book = $book->setNbcomments($totalnbcomments);
+
+            $this->em->persist($book);
             $this->em->flush();
         }
 

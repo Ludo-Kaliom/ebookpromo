@@ -18,10 +18,10 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col">
-                                <a id='listlink' href="{{ path('category_show', {id: book.category.id, slug: book.category.name }) }}">{{ book.category.name }}</a> | {{ book.subcategory.name }}
+                            <a id='listlink' href="{{ path('category_show',{id: book.category.id, slug: book.category.slug}) }}">{{ book.category }}</a> - {{ book.subcategory.name }}
                             </div>
                             <div class="col text-end">
-                                <a id='listlink' href="{{ path('type') }}">{{ book.type }}</a>
+                                <a id='listlink' href="{{ path('type_show',{id: book.type.id, slug: book.type.slug}) }}">{{ book.type }}</a>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
         <div class="row">
             <div class="col-md-3 d-grid">
             </div>
-            <div id="center" class="col-md-2">
+            <div id="center" class="col-md-3">
                 <img id="avatar" src="/uploads/{{ app.user.avatar}}" alt="avatar de {{ app.user.username }}"></br>
                 {{ app.user.username }}
             </div>
@@ -97,13 +97,19 @@
 
             {# afficher un commentaire #}
         <div class="row">
-            <h2>Commentaires</h2>
+                {% if book.nbcomments > 1 %}
+                    <h2> {{ book.nbcomments }} Commentaires</h2>
+                {% elseif book.nbcomments > 0 %}
+                    <h2> {{ book.nbcomments }} Commentaire</h2>
+                {% else %}
+                    <h2> Commentaires</h2>
+                {% endif %}
             {% for comment in book.comments %}
                 <div class="row mt-4">
                     <div class="col-md-3 d-grid">
                     
                     </div>
-                    <div id="center" class="col-md-2">
+                    <div id="center" class="col-md-3">
                         <img id="avatar" src="{{ comment.user.avatar}}" alt="avatar de {{ comment.user.username }}"></br>
                         {{ comment.user.username }}
                     </div>

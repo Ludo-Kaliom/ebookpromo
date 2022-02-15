@@ -76,6 +76,9 @@ class Book
     #[ORM\JoinColumn(nullable: false)]
     private $subcategory;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $nbcomments;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -352,6 +355,18 @@ class Book
     public function setSubcategory(?Subcategory $subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getNbcomments(): ?int
+    {
+        return $this->nbcomments;
+    }
+
+    public function setNbcomments(?int $nbcomments): self
+    {
+        $this->nbcomments = $nbcomments;
 
         return $this;
     }

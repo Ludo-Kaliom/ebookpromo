@@ -31,6 +31,19 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
 
+     /**
+    * @return Book[] Returns an array of Book objects
+    */
+    public function findMostCommented()
+    {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.nbcomments', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

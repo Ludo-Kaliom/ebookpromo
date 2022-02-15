@@ -19,6 +19,28 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+//     public function findMostCommented()
+//     {
+//             $em = $this->getEntityManager();
+
+//             //on recupère le nom des tables
+//             $comment = $em->getClassMetadata("App\Entity\Comment")->getTableName();
+//             $book = $em->getClassMetadata("App\Entity\Book")->getTableName();
+
+//             $conn = $this->getEntityManager()->getConnection();
+
+//             $sql = 'SELECT b.id, b.cover, b.reduceprice, b.normalprice, c.book_id, c.content, COUNT(c.book_id) AS nb
+//                     FROM '.$comment.' AS c, '.$book.' AS b 
+//                     WHERE (b.id = c.book_id)
+//                     GROUP BY b.id
+//                     ORDER BY nb DESC';
+//             $stmt = $conn->prepare($sql);
+//             $resultSet = $stmt->executeQuery();
+
+//             // returns an array of arrays (i.e. a raw data set)
+//             return $resultSet->fetchAllAssociative();
+// }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */
