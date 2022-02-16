@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
@@ -369,6 +370,20 @@ class Book
         $this->nbcomments = $nbcomments;
 
         return $this;
+    }
+
+
+    /**
+     * Permet de savoir si un livre est liké par un utilisateur
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function isLikedByUser(User $user): bool {
+        foreach($this->bookLikes as $booklike){
+            if($booklike->getUser() === $user) return true;
+        }
+        return false;
     }
     
 }

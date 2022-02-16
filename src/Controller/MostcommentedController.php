@@ -27,26 +27,3 @@ class MostcommentedController extends AbstractController
         ]);
     }
 }
-
-//  /**
-//   * @param Itinerary $other
-//   * @return bool
-//   */
-//   public function sameValueAs(Itinerary $other) : bool
-//   {
-//       //We use doctrine's ArrayCollection only to ease comparison
-//       //If Legs would be stored in an ArrayCollection hole the time
-//       //Itinerary itself would not be immutable,
-//       //cause a client could call $itinerary->legs()->add($anotherLeg);
-//       //Keeping ValueObjects immutable is a rule of thumb
-//       $myLegs = new ArrayCollection($this->legs());
-//       $otherLegs = new ArrayCollection($other->legs());
-//       if ($myLegs->count() !== $otherLegs->count()) {
-//           return false;
-//       }
-//       return $myLegs->forAll(function ($index, Leg $leg) use($otherLegs) {
-//           return $otherLegs->exists(function ($otherIndex, Leg $otherLeg) use($leg) {
-//               return $otherLeg->sameValueAs($leg);
-//           });
-//       });
-//   }

@@ -95,14 +95,14 @@
         </div>
         {% endif %}
 
-            {# afficher un commentaire #}
+            {# afficher commentaires #}
         <div class="row">
-                {% if book.nbcomments > 1 %}
-                    <h2> {{ book.nbcomments }} Commentaires</h2>
-                {% elseif book.nbcomments > 0 %}
-                    <h2> {{ book.nbcomments }} Commentaire</h2>
+                {% if book.comments | length > 1 %}
+                    <h2>{{ book.comments | length }} Commentaires</h2>
+                {% elseif book.comments | length > 0 %}
+                    <h2>{{ book.comments | length }} Commentaire</h2>
                 {% else %}
-                    <h2> Commentaires</h2>
+                    <h2>Aucun commentaire n'a été posté</h2>
                 {% endif %}
             {% for comment in book.comments %}
                 <div class="row mt-4">
