@@ -9,6 +9,7 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\BookLikeType;
 use App\Repository\BookLikeRepository;
+use App\Repository\BookRepository;
 use App\Repository\CommentRepository;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -161,6 +162,13 @@ class BookController extends AbstractController
             $this->em->remove($booklike);
             $this->em->flush();
 
+            $nblikes = $booklikeRepository->count(['book' => $book]);
+
+            $book->setNblikes($nblikes);
+
+            $this->em->persist($book);
+            $this->em->flush();
+
             return $this->json([
                 'code' => 200,
                 'message' => 'Like bien supprimé',
@@ -173,6 +181,13 @@ class BookController extends AbstractController
                  ->setUser($user);
 
         $this->em->persist($booklike);
+        $this->em->flush();
+
+        $nblikes = $booklikeRepository->count(['book' => $book]);
+
+        $book->setNblikes($nblikes);
+
+        $this->em->persist($book);
         $this->em->flush();
 
         return $this->json([

@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManager;
 use App\Repository\BookRepository;
 use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,13 +37,8 @@ class TypeController extends AbstractController
      * @Route("/type/{slug}-{id}", name="type_show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function show_type(Type $type, TypeRepository $typeRepository, string $slug): Response
+    public function show_type(Type $type, TypeRepository $typeRepository, string $slug, PaginatorInterface $paginator, Request $request): Response
     {
-        $id = $type->getId();
-        $books = $type->getBooks($id);
-
-        $types = $typeRepository->findAll();
-
         if ($type->getSlug() !== $slug)
         {
             return $this->redirectToRoute('type_show', [
@@ -49,6 +46,13 @@ class TypeController extends AbstractController
                 'slug' => $type->getSlug()
             ], 301); 
         }
+
+        $types = $typeRepository->findAll();
+
+        $id = $type->getId();
+        $data = $type->getBooks($id);
+        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+
 
         return $this->render('type/type_show.html.twig', [
             'controller_name' => 'TypeController',

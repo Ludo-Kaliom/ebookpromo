@@ -80,6 +80,9 @@ class Book
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbcomments;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $nblikes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -384,6 +387,18 @@ class Book
             if($booklike->getUser() === $user) return true;
         }
         return false;
+    }
+
+    public function getNblikes(): ?int
+    {
+        return $this->nblikes;
+    }
+
+    public function setNblikes(?int $nblikes): self
+    {
+        $this->nblikes = $nblikes;
+
+        return $this;
     }
     
 }

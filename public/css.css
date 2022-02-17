@@ -216,3 +216,7 @@ a:hover{
 #margin{
     margin:auto;
 }
+
+.page-link{
+    background-color: rgb(147, 212, 17);
+}

@@ -48,21 +48,11 @@ class BookRepository extends ServiceEntityRepository
     */
     public function findMostPopular()
     {
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-
-        return    $qb->select('b')
-        ->from('App\Entity\Book', 'b')
-        ->leftJoin('App\Entity\BookLike', 'c', 'WITH', 'b.id=c.book')
-        ->addSelect( 'count(c.book) AS like_count')
-        ->addSelect( 'b.cover')
-        ->groupBy('c.book')
-        ->orderBy('like_count', 'DESC')
-        ->setFirstResult( '0')
-        ->setMaxResults( '10' )
-        ->getQuery()
-        // ->getSQL(); // permet de récuperer une conversion en sql utile pour debugger
-        ->getResult();
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.nblikes', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 

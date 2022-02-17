@@ -3,16 +3,12 @@
 {% block title "Les ebooks les plus populaires" %}
 
 {% block body %}
-
     <div class="container">
         <div class="row">
+            <h1>Les livres les plus populaires</h1>
             {{ include('partials/_menu.html.twig') }}
-
-            {% for book in books %}
-            {{ book.id }}
-
-            {% endfor %}
+            {{ include('partials/_listbooks.html.twig') }}
         </div>
     </div>
-
+    
 {% endblock %}
