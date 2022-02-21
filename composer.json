@@ -53,6 +53,9 @@
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
+        "github-oauth": {
+            "github.com": "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"
+       },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,

@@ -21,12 +21,12 @@ class Subcategory
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $status;
 
-    #[ORM\OneToMany(mappedBy: 'subcategory', targetEntity: Book::class)]
-    private $books;
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'subcategories')]
+    private $subcategorybook;
 
     public function __construct()
     {
-        $this->books = new ArrayCollection();
+        $this->subcategorybook = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,31 +59,25 @@ class Subcategory
     }
 
     /**
-     * @return Collection|Book[]
+     * @return Collection<int, Book>
      */
-    public function getBooks(): Collection
+    public function getSubcategorybook(): Collection
     {
-        return $this->books;
+        return $this->subcategorybook;
     }
 
-    public function addBook(Book $book): self
+    public function addSubcategorybook(Book $subcategorybook): self
     {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setSubcategory($this);
+        if (!$this->subcategorybook->contains($subcategorybook)) {
+            $this->subcategorybook[] = $subcategorybook;
         }
 
         return $this;
     }
 
-    public function removeBook(Book $book): self
+    public function removeSubcategorybook(Book $subcategorybook): self
     {
-        if ($this->books->removeElement($book)) {
-            // set the owning side to null (unless already changed)
-            if ($book->getSubcategory() === $this) {
-                $book->setSubcategory(null);
-            }
-        }
+        $this->subcategorybook->removeElement($subcategorybook);
 
         return $this;
     }

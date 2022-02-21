@@ -47,7 +47,7 @@
                 }) }}
                 </div>
 
-                <div class="col-md-4">{{ form_row(form.subcategory, {
+                <div class="col-md-4">{{ form_row(form.subcategories, {
                     label: 'Sous-catégorie'
                 }) }}
                 </div>
@@ -62,3 +62,22 @@
         {{ form_end(form) }}
     </div>
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+    if(jQuery){
+    alert("jQuery est chargé");
+ }
+ else{
+    alert("jQuery n'est pas chargé");
+ }
+ 
+
+$(document).ready(function() {
+    $('.select2').select2();
+});
+</script>
+
+{% endblock  %}

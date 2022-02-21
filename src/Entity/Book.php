@@ -73,20 +73,20 @@ class Book
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
-    #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'books')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $subcategory;
-
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbcomments;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nblikes;
 
+    #[ORM\ManyToMany(targetEntity: Subcategory::class, inversedBy: 'subcategorybook')]
+    private $subcategories;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->bookLikes = new ArrayCollection();
+        $this->subcategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -351,18 +351,6 @@ class Book
         return $this;
     }
 
-    public function getSubcategory(): ?Subcategory
-    {
-        return $this->subcategory;
-    }
-
-    public function setSubcategory(?Subcategory $subcategory): self
-    {
-        $this->subcategory = $subcategory;
-
-        return $this;
-    }
-
     public function getNbcomments(): ?int
     {
         return $this->nbcomments;
@@ -397,6 +385,33 @@ class Book
     public function setNblikes(?int $nblikes): self
     {
         $this->nblikes = $nblikes;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Subcategory>
+     */
+    public function getSubcategories(): Collection
+    {
+        return $this->subcategories;
+    }
+
+    public function addSubcategory(Subcategory $subcategory): self
+    {
+        if (!$this->subcategories->contains($subcategory)) {
+            $this->subcategories[] = $subcategory;
+            $subcategory->addSubcategorybook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubcategory(Subcategory $subcategory): self
+    {
+        if ($this->subcategories->removeElement($subcategory)) {
+            $subcategory->removeSubcategorybook($this);
+        }
 
         return $this;
     }

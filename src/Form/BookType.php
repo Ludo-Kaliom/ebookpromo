@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Type;
+use App\Entity\Category;
 use App\Entity\Subcategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -65,9 +68,28 @@ class BookType extends AbstractType
                 'placeholder' => "Lien vers un site de vente"
             ]
         ])
-        ->add('category')
-        ->add('subcategory')
-        ->add('type')
+        ->add('category', EntityType::class, [
+            'class' => Category::class,
+            'choice_label' => 'name',
+            'label' => 'Catégorie principale du livre',
+            'required' => true,
+            ])
+        ->add('subcategories', EntityType::class, [
+            'class' => Subcategory::class,
+            'label' => 'Sous-catégories du livre',
+            'choice_label' => 'name',
+            'required' => true,
+            'multiple' => true,
+            'attr' => [
+                'class' => 'select2'
+            ]
+        ])
+        ->add('type', EntityType::class, [
+            'class' => Type::class,
+            'choice_label' => 'genre',
+            'label' => 'Type du livre',
+            'required' => true
+        ])
         ->add('publisher', TextType::class, [
             'label' => "Editeur",
             'attr' => [
