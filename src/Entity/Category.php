@@ -19,7 +19,7 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'boolean')]
     private $status;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Book::class)]

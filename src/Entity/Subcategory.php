@@ -18,7 +18,7 @@ class Subcategory
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'boolean')]
     private $status;
 
     #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'subcategories')]

@@ -17,9 +17,9 @@ class Type
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Genre;
+    private $name;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'boolean')]
     private $status;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Book::class)]
@@ -35,21 +35,21 @@ class Type
         return $this->id;
     }
 
-    public function getGenre(): ?string
+    public function getName(): ?string
     {
-        return $this->Genre;
+        return $this->name;
     }
 
-    public function setGenre(string $Genre): self
+    public function setName(string $name): self
     {
-        $this->Genre = $Genre;
+        $this->Genre = $name;
 
         return $this;
     }
 
     public function getSlug(): string
     {
-        return (new Slugify())->slugify($this->Genre);
+        return (new Slugify())->slugify($this->name);
     }
 
     public function getStatus(): ?bool

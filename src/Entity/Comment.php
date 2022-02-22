@@ -19,7 +19,7 @@ class Comment
     #[ORM\Column(type: 'datetime')]
     private $date;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'boolean')]
     private $status;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]

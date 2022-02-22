@@ -44,9 +44,6 @@ class Book
     #[ORM\Column(type: 'string', length: 255)]
     private $link;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $status;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'books')]
     private $user;
 
@@ -81,6 +78,9 @@ class Book
 
     #[ORM\ManyToMany(targetEntity: Subcategory::class, inversedBy: 'subcategorybook')]
     private $subcategories;
+
+    #[ORM\Column(type: 'boolean')]
+    private $status;
 
     public function __construct()
     {
@@ -203,18 +203,6 @@ class Book
     public function setLink(string $link): self
     {
         $this->link = $link;
-
-        return $this;
-    }
-
-    public function getStatus(): ?bool
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?bool $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
@@ -412,6 +400,18 @@ class Book
         if ($this->subcategories->removeElement($subcategory)) {
             $subcategory->removeSubcategorybook($this);
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

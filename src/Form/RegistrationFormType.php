@@ -74,6 +74,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Avatar (.png, taille maximale 100 par 100)',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'votre avatar',
                 ],
