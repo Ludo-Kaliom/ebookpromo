@@ -12,21 +12,21 @@ class TypeFixtures extends Fixture
     {
 
         $tab = array(
-            array('genre' => 'Roman', 'status' => '1'),
-            array('genre' => 'Recueil de nouvelles', 'status' => '1'),
-            array('genre' => 'Anthologie', 'status' => '1'),
-            array('genre' => 'Roman court', 'status' => '1'),
-            array('genre' => 'Nouvelle', 'status' => '1'),
-            array('genre' => 'Recueil de poésies', 'status' => '1'),
-            array('genre' => 'Magazine numérique', 'status' => '1'),
-            array('genre' => 'Livre audio', 'status' => '0'),
-            array('genre' => 'Nawak', 'status' => '0'),
+            array('name' => 'Roman', 'status' => '1'),
+            array('name' => 'Recueil de nouvelles', 'status' => '1'),
+            array('name' => 'Anthologie', 'status' => '1'),
+            array('name' => 'Roman court', 'status' => '1'),
+            array('name' => 'Nouvelle', 'status' => '1'),
+            array('name' => 'Recueil de poésies', 'status' => '1'),
+            array('name' => 'Magazine numérique', 'status' => '1'),
+            array('name' => 'Livre audio', 'status' => '0'),
+            array('name' => 'Nawak', 'status' => '0'),
         );
         
         foreach($tab as $row)
         {
           $type = new Type();
-          $type->setGenre($row['genre']);
+          $type->setName($row['name']);
           $type->setStatus($row['status']);
         
           $manager->persist($type);

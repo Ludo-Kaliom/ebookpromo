@@ -17,9 +17,9 @@ class CategoryController extends AbstractController
     #[Route('/category/', name: 'category')]
     public function show_categories(CategoryRepository $categoryRepository, TypeRepository $typeRepository): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findByStatus(true);
 
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
         return $this->render('category/categories.html.twig', [
             'controller_name' => 'CategoryController',
@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
         }
 
         $id = $category->getId();
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
         $data = $category->getBooks($id);
         $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);

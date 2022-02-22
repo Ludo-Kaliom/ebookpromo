@@ -22,10 +22,12 @@ class BookRepository extends ServiceEntityRepository
     /**
     * @return Book[] Returns an array of Book objects
     */
-    public function findBestDiscounts()
+    public function findBestDiscounts($value)
     {
         return $this->createQueryBuilder('b')
+            ->andWhere('b.status = :val')
             ->orderBy('b.totalprice', 'DESC')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
@@ -34,10 +36,12 @@ class BookRepository extends ServiceEntityRepository
      /**
     * @return Book[] Returns an array of Book objects
     */
-    public function findMostCommented()
+    public function findMostCommented($value)
     {
         return $this->createQueryBuilder('b')
+            ->andWhere('b.status = :val')
             ->orderBy('b.nbcomments', 'DESC')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
@@ -46,10 +50,12 @@ class BookRepository extends ServiceEntityRepository
     /**
     * @return Book[] Returns an array of Book objects
     */
-    public function findMostPopular()
+    public function findMostPopular($value)
     {
         return $this->createQueryBuilder('b')
+            ->andWhere('b.status = :val')
             ->orderBy('b.nblikes', 'DESC')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;

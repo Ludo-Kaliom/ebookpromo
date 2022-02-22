@@ -15,9 +15,9 @@ class MostpopularController extends AbstractController
     #[Route('/mostpopular', name: 'mostpopular')]
     public function mostpopular(TypeRepository $typeRepository, BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
-        $data = $bookRepository->findMostPopular();
+        $data = $bookRepository->findMostPopular(true);
         $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
         
         return $this->render('mostpopular/mostpopular.html.twig', [

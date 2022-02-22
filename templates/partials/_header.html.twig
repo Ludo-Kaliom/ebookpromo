@@ -26,7 +26,7 @@
     <div id='listType' class="row">
         <div>
             {% for type in types %}
-                <a id='listLinkType' href="{{ path('type_show',{id: type.id, slug: type.slug}) }}">{{ type.genre }}</a>
+                <a id='listLinkType' href="{{ path('type_show',{id: type.id, slug: type.slug}) }}">{{ type.name }}</a>
             {% endfor %}
         </div>
     </div>

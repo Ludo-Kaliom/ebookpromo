@@ -42,7 +42,7 @@ class Type
 
     public function setName(string $name): self
     {
-        $this->Genre = $name;
+        $this->name = $name;
 
         return $this;
     }
@@ -100,7 +100,7 @@ class Type
      */
     public function __toString(){
         // to show the name of the Category in the select
-        return $this->Genre;
+        return $this->name;
         // to show the id of the Category in the select
         // return $this->id;
     }

@@ -19,9 +19,9 @@ class MostcommentedController extends AbstractController
     #[Route('/mostcommented', name: 'mostcommented')]
     public function mostcommented(TypeRepository $typeRepository, BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
-        $data = $bookRepository->findMostCommented();
+        $data = $bookRepository->findMostCommented(true);
         $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('mostcommented/mostcommented.html.twig', [

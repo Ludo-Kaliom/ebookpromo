@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    <h1>Book</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+                <th>Isbn</th>
+                <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ book.description }}</td>
+            </tr>
+            <tr>
+                <th>Cover</th>
+                <td>{{ book.cover }}</td>
+            </tr>
+            <tr>
+                <th>Normalprice</th>
+                <td>{{ book.normalprice }}</td>
+            </tr>
+            <tr>
+                <th>Reduceprice</th>
+                <td>{{ book.reduceprice }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{{ book.startdate ? book.startdate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{{ book.enddate ? book.enddate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ book.link }}</td>
+            </tr>
+            <tr>
+                <th>Publisher</th>
+                <td>{{ book.publisher }}</td>
+            </tr>
+            <tr>
+                <th>Authors</th>
+                <td>{{ book.authors }}</td>
+            </tr>
+            <tr>
+                <th>Totalprice</th>
+                <td>{{ book.totalprice }}</td>
+            </tr>
+            <tr>
+                <th>Nbcomments</th>
+                <td>{{ book.nbcomments }}</td>
+            </tr>
+            <tr>
+                <th>Nblikes</th>
+                <td>{{ book.nblikes }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ book.status ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_index') }}">back to list</a>
+
+    <a href="{{ path('admin_edit', {'id': book.id}) }}">edit</a>
+
+    {{ include('admin/_delete_form.html.twig') }}
+{% endblock %}

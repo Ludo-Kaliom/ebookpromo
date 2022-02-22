@@ -35,7 +35,7 @@ class BookController extends AbstractController
      */
     public function newBook(Request $request, TypeRepository $typeRepository): Response
     {
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
         $user = $this->getUser();
         $book = new Book();
         
@@ -61,6 +61,8 @@ class BookController extends AbstractController
             }
         
         $book->setUser($user);
+
+        $book->setStatus(false);
 
         $total = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         
@@ -92,7 +94,7 @@ class BookController extends AbstractController
             ], 301); 
         }
 
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
         $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
        
@@ -105,6 +107,7 @@ class BookController extends AbstractController
             $comment->setUser($user);
             $comment->setBook($book);
             $comment->setDate(new \DateTime());
+            $comment->setStatus(true);
             
             $this->em->persist($comment);
             $this->em->flush();

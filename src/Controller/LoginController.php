@@ -19,7 +19,7 @@ class LoginController extends AbstractController
          // last username entered by the user
          $lastUsername = $authenticationUtils->getLastUsername();
 
-         $types = $typeRepository->findAll();
+         $types = $typeRepository->findByStatus(true);
 
         return $this->render('user/login.html.twig', [
              'last_username' => $lastUsername,

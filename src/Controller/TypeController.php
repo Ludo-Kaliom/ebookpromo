@@ -25,7 +25,7 @@ class TypeController extends AbstractController
     #[Route('/type', name: 'type')]
     public function type(TypeRepository $typeRepository): Response
     {
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
         return $this->render('type/type.html.twig', [
             'controller_name' => 'TypeController',
@@ -47,7 +47,7 @@ class TypeController extends AbstractController
             ], 301); 
         }
 
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
         $id = $type->getId();
         $data = $type->getBooks($id);

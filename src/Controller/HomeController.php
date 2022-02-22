@@ -21,8 +21,8 @@ class HomeController extends AbstractController
      */
     public function index(BookRepository $bookRepo, TypeRepository $typeRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $data = $bookRepo->findAll();
-        $types = $typeRepository->findAll();
+        $data = $bookRepo->findByStatus(true);
+        $types = $typeRepository->findByStatus(true);
 
         $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 

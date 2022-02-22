@@ -18,10 +18,10 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col">
-                            <a id='listlink' href="{{ path('category_show',{id: book.category.id, slug: book.category.slug}) }}">{{ book.category }}</a> - {{ book.subcategory.name }}
+                            <a id='listlink' href="{{ path('category_show',{id: book.category.id, slug: book.category.slug}) }}">{{ book.category }}</a> - {% for category in book.subcategories %}{{ category.name }} {% endfor %}
                             </div>
                             <div class="col text-end">
-                                <a id='listlink' href="{{ path('type_show',{id: book.type.id, slug: book.type.slug}) }}">{{ book.type }}</a>
+                                <a id='listlink' href="{{ path('type_show',{id: book.type.id, slug: book.type.slug}) }}">{{ book.type.name }}</a>
                             </div>
                         </div>
 
@@ -44,7 +44,7 @@
                 
                 <div class="row">
                     <div id="bookcontributor" class="col-md-4">
-                        <img id="avatar" src="{{ book.user.avatar}}" alt="avatar de {{ book.user.username }}"></br>
+                        <img id="avatar" src="/uploads/{{ book.user.avatar}}" alt="avatar de {{ book.user.username }}"></br>
                         <span id="username">{{ book.user.username }}</span>
                         
                     </div>
@@ -105,29 +105,31 @@
                     <h2>Aucun commentaire n'a été posté</h2>
                 {% endif %}
             {% for comment in book.comments %}
-                <div class="row mt-4">
-                    <div class="col-md-3 d-grid">
-                    
-                    </div>
-                    <div id="center" class="col-md-3">
-                        <img id="avatar" src="{{ comment.user.avatar}}" alt="avatar de {{ comment.user.username }}"></br>
-                        {{ comment.user.username }}
-                    </div>
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col text-end">
-                            le {{ comment.date | date('d/m/Y') }}
-                            </div>
+                {% if comment.status is same as(true)%}
+                    <div class="row mt-4">
+                        <div class="col-md-3 d-grid">
+                        
+                        </div>
+                        <div id="center" class="col-md-3">
+                            <img id="avatar" src="/uploads/{{ comment.user.avatar}}" alt="avatar de {{ comment.user.username }}"></br>
+                            {{ comment.user.username }}
                         </div>
 
-                        <div class="row">
-                            <div id="commenttext" class="col">
-                                {{ comment.content | nl2br }}
+                        <div class="col">
+                            <div class="row">
+                                <div class="col text-end">
+                                le {{ comment.date | date('d/m/Y') }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div id="commenttext" class="col">
+                                    {{ comment.content | nl2br }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> 
+                {% endif %}
             {% endfor %}
         </div>
     </div>

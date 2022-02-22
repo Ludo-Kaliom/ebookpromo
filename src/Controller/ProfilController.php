@@ -13,7 +13,7 @@ class ProfilController extends AbstractController
     #[Route('/user/account', name: 'account')]
     public function index(TypeRepository $typeRepository): Response
     {
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
         return $this->render('user/account.html.twig', [
             'controller_name' => 'ProfilController',

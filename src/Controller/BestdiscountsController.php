@@ -16,9 +16,9 @@ class BestdiscountsController extends AbstractController
     public function bestsdiscounts(TypeRepository $typeRepository, BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
 
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
 
-        $data =  $books = $bookRepository->findBestDiscounts();
+        $data =  $books = $bookRepository->findBestDiscounts(true);
         $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('bestdiscounts/bestdiscounts.html.twig', [

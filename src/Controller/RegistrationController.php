@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\TypeRepository;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,8 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TypeRepository $typeRepository): Response
     {
         $user = new User();
-        $types = $typeRepository->findAll();
+        $types = $typeRepository->findByStatus(true);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -48,6 +50,12 @@ class RegistrationController extends AbstractController
 
                 $user->setAvatar($fileName);
             }
+
+            $user->setRegistrationdate(new \DateTime());
+
+            $user->setUpdated(new \DateTime());
+
+            $user->setStatus(true);
 
             $entityManager->persist($user);
             $entityManager->flush();

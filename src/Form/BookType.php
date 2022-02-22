@@ -86,7 +86,7 @@ class BookType extends AbstractType
         ])
         ->add('type', EntityType::class, [
             'class' => Type::class,
-            'choice_label' => 'genre',
+            'choice_label' => 'name',
             'label' => 'Type du livre',
             'required' => true
         ])
