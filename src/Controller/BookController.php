@@ -7,13 +7,12 @@ use App\Entity\BookLike;
 use App\Form\BookType;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Form\BookLikeType;
 use App\Repository\BookLikeRepository;
-use App\Repository\BookRepository;
+
 use App\Repository\CommentRepository;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Id;
+
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,63 +1,19 @@
+{% extends 'base_admin.html.twig' %}
 
-
-{% block title %}Book index{% endblock %}
+{% block title %}Administration{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+    <div id='admin' class="container admin">
+        <div class="row">
+            <div class="col-md-3">
+                {{ include('partials/_adminmenu.html.twig') }}
+            </div>
+            <div class="col-md-9">
+                
+            </div>
+        </div>
+        
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Isbn</th>
-                <th>Description</th>
-                <th>Cover</th>
-                <th>Normalprice</th>
-                <th>Reduceprice</th>
-                <th>Startdate</th>
-                <th>Enddate</th>
-                <th>Link</th>
-                <th>Publisher</th>
-                <th>Authors</th>
-                <th>Totalprice</th>
-                <th>Nbcomments</th>
-                <th>Nblikes</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.isbn }}</td>
-                <td>{{ book.description }}</td>
-                <td>{{ book.cover }}</td>
-                <td>{{ book.normalprice }}</td>
-                <td>{{ book.reduceprice }}</td>
-                <td>{{ book.startdate ? book.startdate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ book.enddate ? book.enddate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ book.link }}</td>
-                <td>{{ book.publisher }}</td>
-                <td>{{ book.authors }}</td>
-                <td>{{ book.totalprice }}</td>
-                <td>{{ book.nbcomments }}</td>
-                <td>{{ book.nblikes }}</td>
-                <td>{{ book.status ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('admin_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('admin_edit', {'id': book.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="17">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('admin_new') }}">Create new</a>
 {% endblock %}
