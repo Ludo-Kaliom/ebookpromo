@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Type{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Créer un nouveau type</h1>
+
+    {{ include('admin/type/_form.html.twig') }}
+
+    <a href="{{ path('type_index') }}">Retour à la liste des types</a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Subcategory{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Créer une nouvelle sous-catégorie</h1>
+
+    {{ include('admin/subcategory/_form.html.twig') }}
+
+    <a href="{{ path('subcategory_index') }}">Retour à la liste des sous-catégories</a>
+</div>
+{% endblock %}

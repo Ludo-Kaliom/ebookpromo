@@ -1,0 +1,15 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit Type{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Editer le type de livre</h1>
+
+    {{ include('admin/type/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('type_index') }}">back to list</a>
+
+    {{ include('admin/type/_delete_form.html.twig') }}
+</div>
+{% endblock %}

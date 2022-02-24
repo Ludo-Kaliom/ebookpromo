@@ -1,0 +1,37 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Type index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des types de livres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actif/Inactif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type in types %}
+            <tr>
+                <td>{{ type.id }}</td>
+                <td>{{ type.name }}</td>
+                <td>{{ type.status ? 'Yes' : 'No' }}</td>
+                <td>
+                    {# <a href="{{ path('type_show', {'id': type.id, 'slug':null}) }}">Voir</a> #}
+                    <a href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune entrée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

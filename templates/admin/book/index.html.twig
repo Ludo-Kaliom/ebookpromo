@@ -7,7 +7,7 @@
 
 {% block body %}
 
-    <div id='admin' class="container admin">
+    <div class="container">
         <h1>
             Book index
         </h1>
@@ -21,59 +21,39 @@
                                                             
                             </th>
                             <th>
-                                Title
+                                Couverture
                                                             
                             </th>
                             <th>
-                                Isbn
+                                Titre
                                                             
                             </th>
                             <th>
-                                Description
+                                Prix normal
                                                             
                             </th>
                             <th>
-                                Cover
+                            Prix en promo
                                                             
                             </th>
                             <th>
-                                Normalprice
+                                Début de la promo
                                                             
                             </th>
                             <th>
-                                Reduceprice
+                                Fin de la promo
                                                             
                             </th>
                             <th>
-                                Startdate
+                                % de réduction
                                                             
                             </th>
                             <th>
-                                Enddate
+                                Nombre de commentaires
                                                             
                             </th>
                             <th>
-                                Link
-                                                            
-                            </th>
-                            <th>
-                                Publisher
-                                                            
-                            </th>
-                            <th>
-                                Authors
-                                                            
-                            </th>
-                            <th>
-                                Totalprice
-                                                            
-                            </th>
-                            <th>
-                                Nbcomments
-                                                            
-                            </th>
-                            <th>
-                                Nblikes
+                                Nombre de likes
                                                             
                             </th>
                             <th>
@@ -81,7 +61,7 @@
                                                             
                             </th>
                             <th>
-                                actions
+                                Actions
                                                             
                             </th>
                         </tr>
@@ -93,17 +73,12 @@
                                     {{ book.id }}
                                 </td>
                                 <td>
+                                    <img src="/uploads/{{ book.cover }}">
+                                </td>
+                                <td>
                                     {{ book.title }}
                                 </td>
-                                <td>
-                                    {{ book.isbn }}
-                                </td>
-                                <td>
-                                    {{ book.description }}
-                                </td>
-                                <td>
-                                    {{ book.cover }}
-                                </td>
+                                
                                 <td>
                                     {{ book.normalprice }}
                                 </td>
@@ -117,15 +92,6 @@
                                     {{ book.enddate ? book.enddate|date('Y-m-d H:i:s') : '' }}
                                 </td>
                                 <td>
-                                    {{ book.link }}
-                                </td>
-                                <td>
-                                    {{ book.publisher }}
-                                </td>
-                                <td>
-                                    {{ book.authors }}
-                                </td>
-                                <td>
                                     {{ book.totalprice }}
                                 </td>
                                 <td>
@@ -135,15 +101,15 @@
                                     {{ book.nblikes }}
                                 </td>
                                 <td>
-                                    {{ book.status ? 'Yes' : 'No' }}
+                                    {{ book.status ? 'Validé' : 'Bloqué' }}
                                 </td>
                                 <td>
                                     <a href="{{ path('book_show', {'id': book.id, 'slug': null}) }}">
-                                        show
+                                        Voir
                                                                             
                                     </a>
                                     <a href="{{ path('book_edit', {'id': book.id, 'slug': null}) }}">
-                                        edit
+                                        Editer
                                                                             
                                     </a>
                                 </td>
@@ -151,7 +117,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="17">
-                                    no records found
+                                    Aucune entrée trouvée
                                                                     
                                 </td>
                             </tr>
@@ -160,11 +126,5 @@
                 </table>
             </div>
         </div>
-
     </div>
-
-    <a href="{{ path('book_new') }}">
-        Create new
-            
-    </a>
 {% endblock %}

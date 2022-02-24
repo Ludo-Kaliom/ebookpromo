@@ -1,0 +1,47 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Roles</th>
+                <th>Pseudonyme</th>
+                <th>Avatar</th>
+                <th>Date d'inscription</th>
+                <th>Mise à jour profil</th>
+                <th>Abonnement</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td><img src="/uploads/{{ user.avatar }}"></td>
+                <td>{{ user.registrationdate ? user.registrationdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.updated ? user.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.subscription ? 'Yes' : 'No' }}</td>
+                <td>{{ user.status ? 'Yes' : 'No' }}</td>
+                <td>
+                    {# <a href="{{ path('user_show', {'id': user.id}) }}">show</a> #}
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">Aucun utilisateur trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

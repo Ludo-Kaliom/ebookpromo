@@ -37,7 +37,7 @@ class BookAdminController extends AbstractController
             return $this->redirectToRoute('book_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('book/new.html.twig', [
+        return $this->renderForm('admin/book/new.html.twig', [
             'book' => $book,
             'form' => $form,
         ]);
