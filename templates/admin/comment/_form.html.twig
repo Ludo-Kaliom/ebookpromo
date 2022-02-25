@@ -1,4 +1,18 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.content, {'label' : 'Contenu'}) }}</div>
+        <div class="col-md-6">{{ form_row(form.date, {'label' : 'Date'}) }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.user, {'label' : "Nom de l'utilisateur"}) }}</div>
+        <div class="col-md-6">{{ form_row(form.book, {'label' : "Nom du livre"}) }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.status, {'label' : 'Actif ou bloqué'}) }}</div>
+    </div>
+
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

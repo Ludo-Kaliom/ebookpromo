@@ -6,10 +6,12 @@
 <div class="container">
     <h1>Editer le type de livre</h1>
 
+    <div class="row-gap">
     {{ include('admin/type/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('type_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('type_index') }}">Retour à la liste des types de livres</a>
 
     {{ include('admin/type/_delete_form.html.twig') }}
+    </div>
 </div>
 {% endblock %}

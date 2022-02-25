@@ -11,8 +11,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Actif/Inactif</th>
-                <th>Actions</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -20,10 +20,10 @@
             <tr>
                 <td>{{ type.id }}</td>
                 <td>{{ type.name }}</td>
-                <td>{{ type.status ? 'Yes' : 'No' }}</td>
+                <td>{{ type.status ? 'Actif' : 'Inactif' }}</td>
                 <td>
-                    {# <a href="{{ path('type_show', {'id': type.id, 'slug':null}) }}">Voir</a> #}
-                    <a href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}">Editer</a>
+                <a "class="btn btn-primary"" href="{{ path('type_show', {'id': type.id, 'slug':null}) }}" role="button">Voir</a>
+                <a "class="btn btn-secondary"" href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}" role="button">Editer</a>
                 </td>
             </tr>
         {% else %}

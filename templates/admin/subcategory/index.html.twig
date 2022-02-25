@@ -24,7 +24,7 @@
                 <td>{{ subcategory.status ? 'Yes' : 'No' }}</td>
                 <td>
                     {# <a href="{{ path('subcategory_show', {'id': subcategory.id}) }}">show</a> #}
-                    <a href="{{ path('subcategory_edit', {'id': subcategory.id, slug:null}) }}">edit</a>
+                    <a class="btn btn-secondary" href="{{ path('subcategory_edit', {'id': subcategory.id, slug:null}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

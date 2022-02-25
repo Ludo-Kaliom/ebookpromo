@@ -24,16 +24,16 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.username }}</td>
                 <td><img src="/uploads/{{ user.avatar }}"></td>
                 <td>{{ user.registrationdate ? user.registrationdate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.updated ? user.updated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.subscription ? 'Yes' : 'No' }}</td>
-                <td>{{ user.status ? 'Yes' : 'No' }}</td>
+                <td>{{ user.subscription ? 'Abonné' : 'Non abonné' }}</td>
+                <td>{{ user.status ? 'Autorisé' : 'Bloqué' }}</td>
                 <td>
                     {# <a href="{{ path('user_show', {'id': user.id}) }}">show</a> #}
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-secondary" href="{{ path('user_edit', {'id': user.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}

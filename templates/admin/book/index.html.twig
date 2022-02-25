@@ -9,7 +9,7 @@
 
     <div class="container">
         <h1>
-            Book index
+            Liste des livres
         </h1>
         <div class="row">
             <div class="col-md-11">
@@ -104,11 +104,11 @@
                                     {{ book.status ? 'Validé' : 'Bloqué' }}
                                 </td>
                                 <td>
-                                    <a href="{{ path('book_show', {'id': book.id, 'slug': null}) }}">
+                                    <a class="btn btn-primary" href="{{ path('book_show', {'id': book.id, 'slug': null}) }}">
                                         Voir
                                                                             
                                     </a>
-                                    <a href="{{ path('book_edit', {'id': book.id, 'slug': null}) }}">
+                                    <a class="btn btn-secondary" href="{{ path('book_edit', {'id': book.id, 'slug': null}) }}">
                                         Editer
                                                                             
                                     </a>

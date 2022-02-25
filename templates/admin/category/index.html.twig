@@ -11,7 +11,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Actif/intactif</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,10 +20,10 @@
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
-                <td>{{ category.status ? 'Yes' : 'No' }}</td>
+                <td>{{ category.status ? 'Actif' : 'Bloqué' }}</td>
                 <td>
-                    <a href="{{ path('category_show', {'id': category.id, 'slug': null}) }}">Voir</a>
-                    <a href="{{ path('category_edit', {'id': category.id, 'slug': null}) }}">Editer</a>
+                    <a class="btn btn-primary" href="{{ path('category_show', {'id': category.id, 'slug': null}) }}">Voir</a>
+                    <a class="btn btn-secondary" href="{{ path('category_edit', {'id': category.id, 'slug': null}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}

@@ -2,14 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Book;
 use App\Entity\Comment;
 use App\Form\Comment1Type;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('admin/comment')]
 class CommentAdminController extends AbstractController
@@ -69,11 +70,20 @@ class CommentAdminController extends AbstractController
     }
 
     #[Route('/{id}', name: 'comment_delete', methods: ['POST'])]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager, CommentRepository $commentRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $book = $comment->getBook();
             $entityManager->remove($comment);
             $entityManager->flush();
+
+            $totalnbcomments = $commentRepository->count(['book' => $book]);
+
+            $book->setNbcomments($totalnbcomments);
+
+            $entityManager->persist($book);
+            $entityManager->flush();
+
         }
 
         return $this->redirectToRoute('comment_index', [], Response::HTTP_SEE_OTHER);
