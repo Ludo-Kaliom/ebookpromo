@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220222121533 extends AbstractMigration
+final class Version20220301153441 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20220222121533 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, type_id INT NOT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, isbn VARCHAR(13) NOT NULL, description LONGTEXT NOT NULL, cover VARCHAR(255) NOT NULL, normalprice DOUBLE PRECISION NOT NULL, reduceprice DOUBLE PRECISION NOT NULL, startdate DATETIME NOT NULL, enddate DATETIME NOT NULL, link VARCHAR(255) NOT NULL, publisher VARCHAR(255) NOT NULL, authors VARCHAR(255) NOT NULL, totalprice INT NOT NULL, nbcomments INT DEFAULT NULL, nblikes INT DEFAULT NULL, status TINYINT(1) NOT NULL, INDEX IDX_CBE5A331A76ED395 (user_id), INDEX IDX_CBE5A331C54C8C93 (type_id), INDEX IDX_CBE5A33112469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, type_id INT NOT NULL, category_id INT DEFAULT NULL, title VARCHAR(255) NOT NULL, isbn VARCHAR(13) NOT NULL, description LONGTEXT NOT NULL, cover VARCHAR(255) NOT NULL, normalprice DOUBLE PRECISION NOT NULL, reduceprice DOUBLE PRECISION NOT NULL, startdate DATETIME NOT NULL, enddate DATETIME NOT NULL, link VARCHAR(255) NOT NULL, publisher VARCHAR(255) NOT NULL, authors VARCHAR(255) NOT NULL, totalprice INT NOT NULL, nbcomments INT DEFAULT NULL, nblikes INT DEFAULT NULL, status TINYINT(1) NOT NULL, INDEX IDX_CBE5A331A76ED395 (user_id), INDEX IDX_CBE5A331C54C8C93 (type_id), INDEX IDX_CBE5A33112469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE book_subcategory (book_id INT NOT NULL, subcategory_id INT NOT NULL, INDEX IDX_5F2BEB3416A2B381 (book_id), INDEX IDX_5F2BEB345DC6FE57 (subcategory_id), PRIMARY KEY(book_id, subcategory_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE book_like (id INT AUTO_INCREMENT NOT NULL, book_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_B5FE0BBB16A2B381 (book_id), INDEX IDX_B5FE0BBBA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, status TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -31,7 +31,7 @@ final class Version20220222121533 extends AbstractMigration
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A331A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A331C54C8C93 FOREIGN KEY (type_id) REFERENCES type (id)');
-        $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A33112469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A33112469DE2 FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL');
         $this->addSql('ALTER TABLE book_subcategory ADD CONSTRAINT FK_5F2BEB3416A2B381 FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE book_subcategory ADD CONSTRAINT FK_5F2BEB345DC6FE57 FOREIGN KEY (subcategory_id) REFERENCES subcategory (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE book_like ADD CONSTRAINT FK_B5FE0BBB16A2B381 FOREIGN KEY (book_id) REFERENCES book (id)');

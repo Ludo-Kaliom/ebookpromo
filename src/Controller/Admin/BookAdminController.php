@@ -19,7 +19,10 @@ class BookAdminController extends AbstractController
     public function index(BookRepository $bookRepository): Response
     {
         return $this->render('/admin/book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'books' => $bookRepository->findBy(
+                array(), 
+                 array('status' => 'ASC')
+              ),
         ]);
     }
 

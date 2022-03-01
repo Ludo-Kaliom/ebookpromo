@@ -12,9 +12,9 @@
             Liste des livres
         </h1>
         <div class="row">
-            <div class="col-md-11">
-                <table class="table">
-                    <thead>
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="align-middle text-center">
                         <tr>
                             <th>
                                 Id
@@ -49,11 +49,11 @@
                                                             
                             </th>
                             <th>
-                                Nombre de commentaires
+                                Nb commentaires
                                                             
                             </th>
                             <th>
-                                Nombre de likes
+                                Nb likes
                                                             
                             </th>
                             <th>
@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
                         {% for book in books %}
-                            <tr>
+                            <tr class="text-center">
                                 <td>
                                     {{ book.id }}
                                 </td>

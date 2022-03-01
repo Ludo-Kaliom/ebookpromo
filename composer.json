@@ -13,6 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.11",
         "knplabs/knp-paginator-bundle": "^5.8",
+        "liip/imagine-bundle": "^2.7",
         "mhujer/breadcrumbs-bundle": "^1.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.2",
@@ -35,7 +36,7 @@
         "symfony/property-access": "6.0.*",
         "symfony/property-info": "6.0.*",
         "symfony/proxy-manager-bridge": "6.0.*",
-        "symfony/runtime": "6.0.*",
+        "symfony/runtime": "^6.0",
         "symfony/security-bundle": "6.0.*",
         "symfony/serializer": "6.0.*",
         "symfony/string": "6.0.*",
@@ -54,7 +55,7 @@
     },
     "config": {
         "github-oauth": {
-            "github.com": "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"
+            "github.com": "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"
        },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -108,7 +109,6 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "fzaninotto/faker": "^1.5",
         "symfony/debug-bundle": "6.0.*",
         "symfony/maker-bundle": "^1.36",
         "symfony/stopwatch": "6.0.*",

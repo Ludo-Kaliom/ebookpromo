@@ -6,8 +6,8 @@
 <div class="container">
     <h1>Liste des types de livres</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="align-middle text-center">
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
@@ -17,13 +17,13 @@
         </thead>
         <tbody>
         {% for type in types %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ type.id }}</td>
                 <td>{{ type.name }}</td>
                 <td>{{ type.status ? 'Actif' : 'Inactif' }}</td>
                 <td>
-                <a "class="btn btn-primary"" href="{{ path('type_show', {'id': type.id, 'slug':null}) }}" role="button">Voir</a>
-                <a "class="btn btn-secondary"" href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}" role="button">Editer</a>
+                <a class="btn btn-primary" href="{{ path('type_show', {'id': type.id, 'slug':null}) }}" role="button">Voir</a>
+                <a class="btn btn-secondary" href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}" role="button">Editer</a>
                 </td>
             </tr>
         {% else %}

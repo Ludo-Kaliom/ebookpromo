@@ -103,8 +103,8 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
-    "fzaninotto/faker": {
-        "version": "v1.5.0"
+    "imagine/imagine": {
+        "version": "1.2.4"
     },
     "knplabs/knp-components": {
         "version": "v3.5.0"
@@ -114,6 +114,19 @@
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "liip/imagine-bundle": {
+        "version": "2.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "d1227d002b70d1a1f941d91845fcd7ac7fbfc929"
+        },
+        "files": [
+            "./config/packages/liip_imagine.yaml",
+            "./config/routes/liip_imagine.yaml"
+        ]
     },
     "mhujer/breadcrumbs-bundle": {
         "version": "1.5.8"

@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -67,10 +69,11 @@ class Book
     private $totalprice;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'books')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete:"SET NULL")]
     private $category;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\JoinColumn(onDelete:"SET NULL")]
     private $nbcomments;
 
     #[ORM\Column(type: 'integer', nullable: true)]

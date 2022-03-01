@@ -62,13 +62,14 @@
             </div>
             
         {{ form_rest(form) }}
-            <button class="btn btn-primary">{{ button|default('Update') }}</button>
+            <button class="btn btn-primary">{{ button|default('Mettre à jour le livre') }}</button>
         {{ form_end(form) }}
     </div>
 
     <div class="container">
         <div class="row">
-    <a href="{{ path('book_index') }}">Retour à la liste des livres</a> 
+        <div class="col">
+    <a class="btn btn-secondary" href="{{ path('book_index') }}">Retour à la liste des livres</a></div> 
     {{ include('/admin/book/_delete_form.html.twig') }}
         </div>
     
@@ -78,14 +79,13 @@
 {% block javascripts %}
 {{ parent() }}
 
-{# <script>
-    if(jQuery){
+<script>
+    {# if(jQuery){
     alert("jQuery est chargé");
  }
  else{
     alert("jQuery n'est pas chargé");
- }
-  #}
+ } #}
 
 $(document).ready(function() {
     $('.select2').select2();

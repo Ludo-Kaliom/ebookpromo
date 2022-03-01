@@ -58,7 +58,7 @@ class BookController extends AbstractController
 
                 $book->setCover($fileName);
             }
-        
+
         $book->setUser($user);
 
         $book->setStatus(false);

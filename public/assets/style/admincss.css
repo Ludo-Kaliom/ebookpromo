@@ -1,0 +1,24 @@
+body {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: large;
+    background-color: whitesmoke;
+    color:rgb(2, 2, 2);
+}
+
+h1{
+    text-align: center;
+    font-variant-caps: small-caps;
+    margin: 30px;
+}
+
+
+.btn btn-secondary{
+    font-size: larger;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+a:hover{
+    color: black;
+}
+
