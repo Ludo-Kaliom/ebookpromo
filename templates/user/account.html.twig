@@ -11,49 +11,80 @@
         <h1>
             Mon compte            
         </h1>
+
         <div class="row">
-            <div class="col-md-4">
-                Date d'inscription : 
-                {{ app.user.registrationdate |date }}
-                <br>
-                    Dernière modification du profil : 
-                    {{ app.user.updated |date }}
-                    <br>
-                        Nombre de promotions proposées 
-                        {{ app.user.books |length }}
-                        <br>
-                            Nombre de commentaires 
-                            {{ app.user.comments |length }}
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col">
-                                    <img id="avatar" src="/uploads/{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}"></br>
-                                    changer d'avatar
-                                </br>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    {{ app.user.email }}
-                                    changer d'email
-                                    
-                                </br>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    
-                                    changer de mot de passe
-                                </br>
-                                </div>
-                            </div>
-                        </div>
-            </div>
-
+        
         </div>
 
-        {% endblock %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <img id="avatar" src="/uploads/{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}">
+                    <br>
+                        <div class="div">{{ app.user.username }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                        {{ form_start(formavatar) }}
+                            
+                        {{ form_row(formavatar.avatar) }}
+                
+                        {{ form_rest(formavatar) }}
+                            <button class="btn btn-primary">{{ button|default('Enregistrer mon nouvel avatar') }}</button>
+                        {{ form_end(formavatar) }}
+                </div>
+            </div>
+        </div>
+<hr>
+        <div class="row">
+            <div class="col-md-4"> 
+            Date d'inscription : 
+            {{ app.user.registrationdate |date("m/d/Y", "Europe/Paris") }}
+            <br>
+            Dernière modification du profil : 
+            {{ app.user.updated |date }}
+            <br>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                        {{ form_start(formmail) }}
+                            
+                        {{ form_row(formmail.email) }}
+                
+                        {{ form_rest(formmail) }}
+                            <button class="btn btn-primary">{{ button|default('Enregistrer mon nouvel email') }}</button>
+                        {{ form_end(formmail) }}
+                </div>
+            </div>
+        </div>
+
+<hr>
+    <div class="row">
+            <div class="col-md-4">
+                <div class="div">
+                Nombre de promotions proposées 
+                    {{ app.user.books |length }}
+                    <br>
+                    Nombre de commentaires 
+                    {{ app.user.comments |length }}
+                </div>         
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                        {{ form_start(formpassword) }}
+                            
+                        {{ form_row(formpassword.plainPassword) }}
+                
+                        {{ form_rest(formpassword) }}
+                            <button class="btn btn-primary">{{ button|default('Enregistrer mon nouveau mot de passe') }}</button>
+                        {{ form_end(formpassword) }}
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
         
