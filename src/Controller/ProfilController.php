@@ -51,6 +51,7 @@ class ProfilController extends AbstractController
         $user->setUpdated(new \DateTime());
         
         $em->flush();
+        $this->addFlash('success', 'Votre avatar a bien été modifié');
         return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
 
         }
@@ -67,6 +68,7 @@ class ProfilController extends AbstractController
             $user->setUpdated(new \DateTime());
         
         $em->flush();
+        $this->addFlash('success', 'Votre email a bien été modifié');
         return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
 
         }
@@ -93,6 +95,7 @@ class ProfilController extends AbstractController
             $user->setUpdated(new \DateTime());
         
         $em->flush();
+        $this->addFlash('success', 'Votre mot de passe a bien été modifié');
         return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
 
         }

@@ -64,12 +64,16 @@ class BookController extends AbstractController
         $book->setStatus(false);
 
         $total = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
+
+        $totalprice = 100 - $total;
         
-        $book->setTotalprice($total);
+        $book->setTotalprice($totalprice);
         
         $this->em->persist($book);
         $this->em->flush();
 
+        $this->addFlash('success', "Votre livre a bien été enregistré, il est en attente d'être validé par notre équipe");
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
         }
         
 
@@ -94,7 +98,6 @@ class BookController extends AbstractController
         }
 
         $types = $typeRepository->findByStatus(true);
-        $pourcent = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
         $user = $this->getUser();
        
         $comment = new Comment();
@@ -123,7 +126,6 @@ class BookController extends AbstractController
         return $this->render('book/book_show.html.twig', [
             'book'=> $book,
             'comment' => $comment,
-            'pourcent' => $pourcent,
             'comment_form' => $form->createView(),
             'types' => $types, 
         ]);

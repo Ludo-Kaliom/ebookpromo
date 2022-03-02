@@ -58,7 +58,7 @@
     },
     "config": {
         "github-oauth": {
-            "github.com": "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"
+            "github.com": "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"
        },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,

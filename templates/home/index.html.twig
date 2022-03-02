@@ -2,6 +2,13 @@
 
 {% block body %}
     <div class="container">
+    {% for message in app.flashes('success') %}
+
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+
+    {% endfor %}
         <div class="row">
             {{ include('partials/_menu.html.twig') }}
             {{ include('partials/_listbooks.html.twig') }}

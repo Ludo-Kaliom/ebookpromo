@@ -82,7 +82,7 @@
                             </span>
                         </br>
                         <span class="reduceprice">
-                            {{ pourcent }}
+                            {{ book.totalprice }}
                             %
                                                     
                         </span>
@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-md-3 d-grid"></div>
             <div id="center" class="col-md-3">
-                <img id="avatar" src="/uploads/{{ app.user.avatar | imagine_filter('thumb', runtimeConfig)}}" alt="avatar de {{ app.user.username }}"></br>
+                <img id="avatar" src="/uploads/{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}"></br>
                 {{ app.user.username }}
             </div>
             <div id="commentform" class="col">
