@@ -9,6 +9,16 @@ liip_imagine:
             quality: 75
             filters:
                 scale:
-                    dim: [230, 350]
+                    dim: [200, 300]
+        bookshow:
+            quality: 75
+            filters:
+                scale:
+                    dim: [300, 400]
+        avatarbookshow:
+            quality: 75
+            filters:
+                scale:
+                    dim: [110, 110]
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"

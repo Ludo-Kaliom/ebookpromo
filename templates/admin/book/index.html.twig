@@ -73,7 +73,7 @@
                                     {{ book.id }}
                                 </td>
                                 <td>
-                                    <img src="/uploads/{{ book.cover }}">
+                                    <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('avatarbookshow')}}">
                                 </td>
                                 <td>
                                     {{ book.title }}

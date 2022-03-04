@@ -14,7 +14,7 @@
                         {{ book.title }}
                     </h1>
                     <div id="center" class="col-md-4">
-                        <img src="/uploads/{{ book.cover }}" alt="couverture de {{ book.title }}"></div>
+                        <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('bookshow')}}" alt="couverture de {{ book.title }}"></div>
 
                         <div class="col-md-8">
                             <div class="row">
@@ -60,7 +60,7 @@
 
                     <div class="row">
                         <div id="bookcontributor" class="col-md-4">
-                            <img id="avatar" src="/uploads/{{ book.user.avatar }}" alt="avatar de {{ book.user.username }}"></br>
+                            <img id="avatar" src="{{asset('/uploads/' ~ book.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ book.user.username }}"></br>
                             <span id="username">
                                 {{ book.user.username }}
                             </span>
@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-md-3 d-grid"></div>
             <div id="center" class="col-md-3">
-                <img id="avatar" src="/uploads/{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}"></br>
+                <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
                 {{ app.user.username }}
             </div>
             <div id="commentform" class="col">
@@ -165,7 +165,7 @@
                 <div class="row mt-4">
                     <div class="col-md-3 d-grid"></div>
                     <div id="center" class="col-md-3">
-                        <img id="avatar" src="/uploads/{{ comment.user.avatar }}" alt="avatar de {{ comment.user.username }}"></br>
+                        <img id="avatar" src="{{asset('/uploads/' ~ book.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ comment.user.username }}"></br>
                         {{ comment.user.username }}
                     </div>
 

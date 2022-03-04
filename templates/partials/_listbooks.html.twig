@@ -2,8 +2,8 @@
 {% for book in books %}
     <div class="col-md-3">
 
-        <div class="card"> 
-                <img src="/uploads/{{ book.cover }}" class="card-img-top" alt="couverture de {{ book.title }}">
+        <div class="card">
+                <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('scale')}}" class="card-img-top" alt="couverture de {{ book.title }}">
             <div class="card-body d-grid gap-2">
 
                 <p class="card-title"><span class="reduceprice">{{ book.reduceprice }} €</span> au lieu de <span class="normalprice">{{ book.normalprice }} €</span></p>
