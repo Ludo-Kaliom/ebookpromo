@@ -124,7 +124,7 @@
                 <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
                 {{ app.user.username }}
             </div>
-            <div id="commentform" class="col">
+            <div id="commentform" class="col-md-6">
                 {{ form_start(comment_form) }}
 
                 {{ form_row(comment_form.content) }}
