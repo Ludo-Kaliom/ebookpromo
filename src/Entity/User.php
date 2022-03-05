@@ -57,11 +57,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: BookLike::class)]
     private $bookLikes;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
+    private $article;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
         $this->Comments = new ArrayCollection();
         $this->bookLikes = new ArrayCollection();
+        $this->article = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -301,6 +305,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($bookLike->getUser() === $this) {
                 $bookLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticle(): Collection
+    {
+        return $this->article;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->article->contains($article)) {
+            $this->article[] = $article;
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->article->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
             }
         }
 
