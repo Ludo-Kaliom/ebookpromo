@@ -48,7 +48,7 @@
                                     {{ article.status ? 'Publié' : 'Non publié' }}
                                 </td>
                                 <td>
-                                    <a href="{{ path('article_show', {'id': article.id}) }}">
+                                    <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">
                                         show
                                     </a>
                                     <a href="{{ path('article_edit', {'id': article.id}) }}">
