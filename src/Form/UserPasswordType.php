@@ -9,14 +9,15 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UserPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('plainPassword', PasswordType::class, [
-                'label' => 'Changer de mot de passe',
+            ->add('plainPassword', RepeatedType::class, [
+                // 'label' => 'Changer de mot de passe',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -35,6 +36,8 @@ class UserPasswordType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'first_options'  => ['label' => 'Changer votre mot de passe'],
+                'second_options' => ['label' => 'Repétez le mot de passe'],
             ])
         ;
     }
