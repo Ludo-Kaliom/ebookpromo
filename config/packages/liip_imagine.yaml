@@ -20,5 +20,11 @@ liip_imagine:
             filters:
                 scale:
                     dim: [110, 110]
+
+        headerbookshow:
+            quality: 75
+            filters:
+                scale:
+                    dim: [150, 270]
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"

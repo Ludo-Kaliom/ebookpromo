@@ -11,7 +11,7 @@
             {{ include('partials/_menu.html.twig') }}
             <div class="col-md-9">
                 {% for type in types %}
-                <h3>{{ type.genre }}</h3>
+                <h3>{{ type.name }}</h3>
                 <a id="listlink" href="{{ path('type_show', {id: type.id, slug: type.slug}) }}">{{type.books | length }} Voir tous les ebooks référencés dans cette catégorie</a>
                     
                 {% endfor %}

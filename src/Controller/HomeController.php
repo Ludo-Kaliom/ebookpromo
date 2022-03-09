@@ -24,11 +24,12 @@ class HomeController extends AbstractController
         $data = $bookRepo->findByStatus(true);
         $types = $typeRepository->findByStatus(true);
 
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('home/index.html.twig', [
-            'books' => $books,
-            'types' => $types
+            'books' => $data,
+            'types' => $types,
+            'paginates' => $paginates,
         ]);
     }
 }

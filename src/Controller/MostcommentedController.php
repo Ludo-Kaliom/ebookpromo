@@ -21,13 +21,20 @@ class MostcommentedController extends AbstractController
     {
         $types = $typeRepository->findByStatus(true);
 
-        $data = $bookRepository->findMostCommented(true);
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $data = $bookRepository->findBy(
+            array(
+                'status' => true,
+                'nbcomments' => true,
+            ),
+            array('nbcomments' => 'ASC')
+        );
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('mostcommented/mostcommented.html.twig', [
             'controller_name' => 'MostcommentedController',
             'types' => $types,
-            'books' => $books,
+            'books' => $data,
+            'paginates' => $paginates
         ]);
     }
 }

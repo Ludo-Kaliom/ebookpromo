@@ -17,13 +17,18 @@ class MostpopularController extends AbstractController
     {
         $types = $typeRepository->findByStatus(true);
 
-        $data = $bookRepository->findMostPopular(true);
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $data = $bookRepository->findBy(array
+            ('status' => true,
+             'nblikes' => true,
+            ), array('nblikes' => 'ASC')
+        );
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
         
         return $this->render('mostpopular/mostpopular.html.twig', [
             'controller_name' => 'MostpopularController',
             'types' => $types,
-            'books' => $books
+            'books' => $data,
+            'paginates' => $paginates
 
         ]);
     }

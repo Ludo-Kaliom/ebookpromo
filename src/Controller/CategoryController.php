@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
      * @Route("/category/{slug}-{id}", name="category_show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function Category(Category $category, TypeRepository $typeRepository, string $slug, PaginatorInterface $paginator, Request $request): Response
+    public function Category(BookRepository $bookRepository, Category $category, TypeRepository $typeRepository, string $slug, PaginatorInterface $paginator, Request $request): Response
     {
 
         if ($category->getSlug() !== $slug)
@@ -47,12 +47,19 @@ class CategoryController extends AbstractController
         $types = $typeRepository->findByStatus(true);
 
         $data = $category->getBooks($id);
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+
+        $books = $bookRepository->findBy(array
+            ('category' => $id,
+            'status' => true
+            ), array('status' => 'ASC')
+        );
 
         return $this->render('category/category_show.html.twig', [
-            'books' => $books,
+            'paginates' => $paginates,
             'category' => $category,
             'types' => $types,
+            'books' => $books
         ]);
     }
 

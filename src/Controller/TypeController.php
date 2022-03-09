@@ -37,7 +37,7 @@ class TypeController extends AbstractController
      * @Route("/type/{slug}-{id}", name="type_show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function show_type(Type $type, TypeRepository $typeRepository, string $slug, PaginatorInterface $paginator, Request $request): Response
+    public function show_type(Type $type, TypeRepository $typeRepository, string $slug, PaginatorInterface $paginator, Request $request, BookRepository $bookRepository): Response
     {
         if ($type->getSlug() !== $slug)
         {
@@ -51,14 +51,22 @@ class TypeController extends AbstractController
 
         $id = $type->getId();
         $data = $type->getBooks($id);
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        
+        $books = $bookRepository->findBy(array
+            ('type' => $id,
+            'status' => true
+            ), array('status' => 'ASC')
+        );
+                
 
         return $this->render('type/type_show.html.twig', [
             'controller_name' => 'TypeController',
             'types' => $types,
-            'books' => $books,
-            'type' => $type
+            'paginates' => $paginates,
+            'type' => $type,
+            'books' => $books
         ]);
     }
 }

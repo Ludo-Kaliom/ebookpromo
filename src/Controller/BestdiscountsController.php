@@ -18,13 +18,14 @@ class BestdiscountsController extends AbstractController
 
         $types = $typeRepository->findByStatus(true);
 
-        $data =  $books = $bookRepository->findBestDiscounts(true);
-        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $data = $bookRepository->findBestDiscounts(true);
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('bestdiscounts/bestdiscounts.html.twig', [
             'controller_name' => 'BestdiscountsController',
             'types' => $types,
-            'books' => $books,
+            'books' => $data,
+            'paginates' => $paginates,
         ]);
     }
 }
