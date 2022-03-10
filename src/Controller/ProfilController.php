@@ -18,9 +18,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfilController extends AbstractController
 {
     #[Route('/user/account', name: 'account', methods: ['GET', 'POST'])]
-    public function index(TypeRepository $typeRepository, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function index(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $types = $typeRepository->findByStatus(true);
 
         $user = new User();
 
@@ -102,8 +101,6 @@ class ProfilController extends AbstractController
 
 
         return $this->render('user/account.html.twig', [
-            'controller_name' => 'ProfilController',
-            'types' => $types,
             'formavatar' => $formavatar->createView(),
             'formmail' => $formmail->createView(),
             'formpassword' => $formpassword->createView()

@@ -13,9 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MostpopularController extends AbstractController
 {
     #[Route('/mostpopular', name: 'mostpopular')]
-    public function mostpopular(TypeRepository $typeRepository, BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
+    public function mostpopular(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $types = $typeRepository->findByStatus(true);
 
         $data = $bookRepository->findBy(array
             ('status' => true,
@@ -26,7 +25,6 @@ class MostpopularController extends AbstractController
         
         return $this->render('mostpopular/mostpopular.html.twig', [
             'controller_name' => 'MostpopularController',
-            'types' => $types,
             'books' => $data,
             'paginates' => $paginates
 

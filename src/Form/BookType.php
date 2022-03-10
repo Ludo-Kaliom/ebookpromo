@@ -57,10 +57,13 @@ class BookType extends AbstractType
             ]
         ])
         ->add('startDate', DateType::class, [
-            'label' => "Date de début de la promotion"
+            'label' => "Date de début de la promotion",
+            'data' => new \DateTime()
+
         ])
         ->add('endDate', DateType::class, [
-            'label' => "Date de fin de la promotion"
+            'label' => "Date de fin de la promotion",
+            'data' => new \DateTime()
         ])
         ->add('link', UrlType::class, [
             'label' => "Où trouver la promotion",

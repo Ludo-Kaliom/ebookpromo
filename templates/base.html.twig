@@ -25,7 +25,10 @@
             </script>
         {% endblock %}
     </head>
-    {{ include('partials/_header.html.twig') }}
+    {{ render(controller(
+        'App\\Controller\\HomeController::header'
+    )) }}
+    
     <body>
 
         {% block body %}{% endblock %}

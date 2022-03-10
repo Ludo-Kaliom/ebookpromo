@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Book;
 use App\Entity\Type;
-use Doctrine\ORM\EntityManager;
 use App\Repository\BookRepository;
 use App\Repository\TypeRepository;
-use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,8 +55,7 @@ class TypeController extends AbstractController
             ('type' => $id,
             'status' => true
             ), array('status' => 'ASC')
-        );
-                
+        );  
 
         return $this->render('type/type_show.html.twig', [
             'controller_name' => 'TypeController',

@@ -32,9 +32,9 @@ class BookController extends AbstractController
      /**
      * @Route("book/newbook", name="newbook")
      */
-    public function newBook(Request $request, TypeRepository $typeRepository): Response
+    public function newBook(Request $request): Response
     {
-        $types = $typeRepository->findByStatus(true);
+
         $user = $this->getUser();
         $book = new Book();
         
@@ -79,7 +79,6 @@ class BookController extends AbstractController
 
         return $this->render('book/newbook.html.twig', [
             'form' => $form->createView(),
-            'types' => $types
         ]);
     }
 
@@ -87,7 +86,7 @@ class BookController extends AbstractController
      * @Route("/book/{slug}-{id}", name="book_show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      */
-    public function Book(Request $request, Book $book, TypeRepository $typeRepository, string $slug, CommentRepository $commentRepository): Response
+    public function Book(Request $request, Book $book, string $slug, CommentRepository $commentRepository): Response
     {
         if ($book->getSlug() !== $slug)
         {
@@ -97,7 +96,6 @@ class BookController extends AbstractController
             ], 301); 
         }
 
-        $types = $typeRepository->findByStatus(true);
         $user = $this->getUser();
        
         $comment = new Comment();
@@ -126,8 +124,7 @@ class BookController extends AbstractController
         return $this->render('book/book_show.html.twig', [
             'book'=> $book,
             'comment' => $comment,
-            'comment_form' => $form->createView(),
-            'types' => $types, 
+            'comment_form' => $form->createView(), 
         ]);
     }
 

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title subcategory.name %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+        <h1>Tous les livres disponibles dans la sous-catégorie {{ subcategory.name }}</h1>
+            {{ include('partials/_menu.html.twig') }}
+            {{ include('partials/_listbooks.html.twig') }}
+        </div>
+    </div>
+    
+{% endblock %}

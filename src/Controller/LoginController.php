@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-     public function index(AuthenticationUtils $authenticationUtils, TypeRepository $typeRepository): Response
+     public function index(AuthenticationUtils $authenticationUtils): Response
     {
          // get the login error if there is one
          $error = $authenticationUtils->getLastAuthenticationError();
@@ -19,12 +19,11 @@ class LoginController extends AbstractController
          // last username entered by the user
          $lastUsername = $authenticationUtils->getLastUsername();
 
-         $types = $typeRepository->findByStatus(true);
+        
 
         return $this->render('user/login.html.twig', [
              'last_username' => $lastUsername,
              'error'         => $error,
-             'types' => $types
         ]);
     }
 }
