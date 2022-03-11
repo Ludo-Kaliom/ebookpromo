@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Book;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Subcategory;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -60,6 +62,15 @@ class BookRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+//     public function filteredByMachine(Subcategory $subcategory, QueryBuilder $queryBuilder): QueryBuilder
+// {
+//     $queryBuilder
+//         ->innerJoin("b.subcategorie", "S")
+//         ->andWhere("S.id = :subcatory")
+//         ->setParameter("subcategry", $subcategory);
+//     return $queryBuilder;
+// }
 
 
     // /**

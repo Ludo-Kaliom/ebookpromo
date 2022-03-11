@@ -1,23 +1,41 @@
-
-{% for book in books %}
+{% for book in books %}{% if book.status is same as true %}
     <div class="col-md-3">
-
+        
         <div class="card">
-    <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}"><img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('scale')}}" class="card-img-top" alt="couverture de {{ book.title }}"></a>
-            <div class="card-body d-grid gap-2">
+            <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
+                <img src="{{ asset('/uploads/' ~ book.cover)| imagine_filter('scale') }}" class="card-img-top" alt="couverture de {{ book.title }}"></a>
+                <div class="card-body d-grid gap-2">
 
-                <p class="card-title"><span class="reduceprice">{{ book.reduceprice }} €</span> au lieu de <span class="normalprice">{{ book.normalprice }} €</span></p>
+                    <p class="card-title">
+                        <span class="reduceprice">
+                            {{ book.reduceprice }}
+                            €
+                        </span>
+                        au lieu de 
+                        <span class="normalprice">
+                            {{ book.normalprice }}
+                            €
+                        </span>
+                    </p>
 
                     <div class="booklink">
-                        <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">En savoir plus</a>
+                        <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
+                            En savoir plus
+                        </a>
                     </div>
 
-                <p class="card-text">expire le {{ book.enddate | date('d/m/Y') }}</p>
+                    <p class="card-text">
+                        expire le 
+                        {{ book.enddate | date('d/m/Y') }}
+                    </p>
+                </div>
             </div>
+        
         </div>
-    </div>
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 
-<div id='link' class="pagination justify-content-center">
-{{ knp_pagination_render(paginates) }}
-</div>
+    <div id='link' class="pagination justify-content-center">
+        {{ knp_pagination_render(paginates) }}
+    </div>
+    

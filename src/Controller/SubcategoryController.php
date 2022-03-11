@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Amp\Http\Status;
 use App\Entity\Subcategory;
 use App\Repository\BookRepository;
 use App\Repository\SubcategoryRepository;
@@ -38,24 +39,15 @@ class SubcategoryController extends AbstractController
             ], 301); 
         }
 
-
         $id = $subcategory->getId();
-    
 
         $data = $subcategory->getSubcategorybook($id);
-        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
-
-        $books = $bookRepository->findBy(array
-            (
-            'status' => true
-            ), array('status' => 'ASC')
-        );
-        
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);   
 
         return $this->render('subcategory/subcategory_show.html.twig', [
             'paginates' => $paginates,
             'subcategory' => $subcategory,
-            'books' => $books
+            'books' => $data,
         ]);
     }
 }
