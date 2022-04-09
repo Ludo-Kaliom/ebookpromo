@@ -3,23 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\BookLike;
 use App\Form\BookType;
 use App\Entity\Comment;
+use App\Entity\BookLike;
 use App\Form\CommentType;
-use App\Repository\BookLikeRepository;
-
 use App\Repository\CommentRepository;
-use App\Repository\TypeRepository;
-use Doctrine\ORM\EntityManagerInterface;
-
+use App\Repository\BookLikeRepository;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
 
 class BookController extends AbstractController
 {
@@ -29,17 +25,23 @@ class BookController extends AbstractController
         $this->em = $em;
     }
 
+    /**
+     * @Route("/book", name="book")
+     */
+    public function index(): Response
+    {
+        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+    }
+
      /**
      * @Route("book/newbook", name="newbook")
      */
     public function newBook(Request $request): Response
     {
-
         $user = $this->getUser();
         $book = new Book();
-        
-        $form = $this->createForm(BookType::class, $book);
 
+        $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 

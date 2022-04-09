@@ -1,7 +1,7 @@
 {% for book in books %}{% if book.status is same as true %}
     <div class="col-md-3">
         
-        <div class="card">
+        <div class="card h-100 flex-fill">
             <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
                 <img src="{{ asset('/uploads/' ~ book.cover)| imagine_filter('scale') }}" class="card-img-top" alt="couverture de {{ book.title }}"></a>
                 <div class="card-body d-grid gap-2">
@@ -18,8 +18,8 @@
                         </span>
                     </p>
 
-                    <div class="booklink">
-                        <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
+                    <div class="linkseller">
+                        <a class="align-items-center" id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
                             En savoir plus
                         </a>
                     </div>
