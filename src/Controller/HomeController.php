@@ -30,7 +30,7 @@ class HomeController extends AbstractController
 
     public function header(BookRepository $bookRepo, TypeRepository $typeRepository): Response
     {
-        $data = $bookRepo->findByStatus(true);
+        $data = $bookRepo->findByHeaderBooks();
         $types = $typeRepository->findByStatus(true);
 
         return $this->render('partials/_header.html.twig', [

@@ -15,14 +15,11 @@ class ArticleController extends AbstractController
      */
     public function index(Article $article, string $slug): Response
     {
-
-
-        if ($article->getSlug() !== $slug)
-        {
+        if ($article->getSlug() !== $slug) {
             return $this->redirectToRoute('article_show', [
                 'id' => $article->getId(),
                 'slug' => $article->getSlug()
-            ], 301); 
+            ], 301);
         }
 
         return $this->render('article/article_show.html.twig', [

@@ -63,6 +63,21 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+    * @return Book[] Returns an array of Book objects
+    */
+    public function findByHeaderBooks()
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.status = :val')
+            ->setParameter('val', true)
+            ->orderBy('b.id', 'ASC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //     public function filteredByMachine(Subcategory $subcategory, QueryBuilder $queryBuilder): QueryBuilder
 // {
 //     $queryBuilder
