@@ -28,14 +28,14 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.status = :val')
-            ->orderBy('b.totalprice', 'DESC')
+            ->orderBy('b.discountpercentage', 'DESC')
             ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
     }
 
-     /**
+    /**
     * @return Book[] Returns an array of Book objects
     */
     public function findMostCommented($value)

@@ -52,7 +52,7 @@
 
                             <div class="row">
                                 <div id="description" class="col mt-4">
-                                    {{ book.description | nl2br }}
+                                    {{ book.description|raw }}
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             </span>
                         </br>
                         <span class="reduceprice">
-                            {{ book.totalprice }}
+                            {{ book.discountpercentage }}
                             %
                                                     
                         </span>

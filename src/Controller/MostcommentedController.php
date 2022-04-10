@@ -25,8 +25,7 @@ class MostcommentedController extends AbstractController
         $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
 
         return $this->render('mostcommented/mostcommented.html.twig', [
-            'books' => $data,
-            'paginates' => $paginates
+            'books' => $paginates,
         ]);
     }
 }

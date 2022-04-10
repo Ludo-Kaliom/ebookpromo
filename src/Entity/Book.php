@@ -65,7 +65,7 @@ class Book
     private $type;
 
     #[ORM\Column(type: 'integer')]
-    private $totalprice;
+    private $discountpercentage;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'books')]
     #[ORM\JoinColumn(onDelete:"SET NULL")]
@@ -317,14 +317,14 @@ class Book
         return $this;
     }
 
-    public function getTotalprice(): ?float
+    public function getDiscountpercentage(): ?float
     {
-        return $this->totalprice;
+        return $this->discountpercentage;
     }
 
-    public function setTotalprice(float $totalprice): self
+    public function setDiscountpercentage(float $discountpercentage): self
     {
-        $this->totalprice = $totalprice;
+        $this->discountpercentage = $discountpercentage;
 
         return $this;
     }

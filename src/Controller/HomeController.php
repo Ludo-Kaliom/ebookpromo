@@ -18,13 +18,9 @@ class HomeController extends AbstractController
      */
     public function index(BookRepository $bookRepo, PaginatorInterface $paginator, Request $request): Response
     {
-        $data = $bookRepo->findByStatus(true);
-
-        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
-
+        $books = $paginator->paginate($bookRepo->findByStatus(true), $request->query->getInt('page', 1), 11);
         return $this->render('home/index.html.twig', [
-            'books' => $data,
-            'paginates' => $paginates,
+            'books' => $books
         ]);
     }
 
@@ -32,7 +28,7 @@ class HomeController extends AbstractController
     {
         $data = $bookRepo->findByHeaderBooks();
         $types = $typeRepository->findByStatus(true);
-
+        
         return $this->render('partials/_header.html.twig', [
             'books' => $data,
             'types' => $types

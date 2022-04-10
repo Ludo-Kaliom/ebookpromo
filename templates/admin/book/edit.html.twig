@@ -3,40 +3,32 @@
 {% block title %}Edit Book{% endblock %}
 
 {% block body %}
-
-<div class="container">
+    <div class="container">
         <div class="row text-center">
-        <h1>Editer un livre</h1>
+            <h1>Editer un livre</h1>
         </div>
-        
-
         {{ form_start(form) }}
             <div class="row">
                 <div class="col-md-6">{{ form_row(form.title) }}
                 <span class="error">{{ form_errors(form.title) }}</span></div>
                 <div class="col-md-6">{{ form_row(form.cover) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">{{ form_row(form.authors) }}</div>
                 <div class="col-md-6">{{ form_row(form.link) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">{{ form_row(form.startDate) }}</div>
                 <div class="col-md-6">{{ form_row(form.endDate) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">{{ form_row(form.normalPrice) }}</div>
                 <div class="col-md-6">{{ form_row(form.reducePrice) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">{{ form_row(form.publisher) }}</div>
                 <div class="col-md-6">{{ form_row(form.isbn) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-4">{{ form_row(form.type, {
                     label: 'Type de livres'
@@ -46,33 +38,28 @@
                     label: 'Catégorie principale'
                 }) }}
                 </div>
-
                 <div class="col-md-4">{{ form_row(form.subcategories, {
                     label: 'Sous-catégorie'
                 }) }}
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">{{ form_row(form.description) }}</div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">{{ form_row(form.status) }}</div>
             </div>
-            
         {{ form_rest(form) }}
             <button class="btn btn-primary">{{ button|default('Mettre à jour le livre') }}</button>
         {{ form_end(form) }}
     </div>
-
     <div class="container">
         <div class="row">
-        <div class="col">
-    <a class="btn btn-secondary" href="{{ path('book_index') }}">Retour à la liste des livres</a></div> 
-    {{ include('/admin/book/_delete_form.html.twig') }}
+            <div class="col">
+                <a class="btn btn-secondary" href="{{ path('book_index') }}">Retour à la liste des livres</a>
+            </div> 
+                {{ include('/admin/book/_delete_form.html.twig') }}
         </div>
-    
     </div>
 {% endblock %}
 
@@ -80,16 +67,9 @@
 {{ parent() }}
 
 <script>
-    {# if(jQuery){
-    alert("jQuery est chargé");
- }
- else{
-    alert("jQuery n'est pas chargé");
- } #}
-
 $(document).ready(function() {
     $('.select2').select2();
 });
 </script>
 
-{% endblock  %}
+{% endblock %}

@@ -29,20 +29,15 @@ class CategoryController extends AbstractController
      */
     public function Category(BookRepository $bookRepository, Category $category, string $slug, PaginatorInterface $paginator, Request $request): Response
     {
-
-        if ($category->getSlug() !== $slug)
-        {
+        if ($category->getSlug() !== $slug){
             return $this->redirectToRoute('book_show', [
                 'id' => $category->getId(),
                 'slug' => $category->getSlug()
             ], 301); 
         }
-
         $id = $category->getId();
-
         $data = $category->getBooks($id);
         $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
-
         $books = $bookRepository->findBy(array
             ('category' => $id,
             'status' => true
@@ -55,5 +50,4 @@ class CategoryController extends AbstractController
             'books' => $books
         ]);
     }
-
 }

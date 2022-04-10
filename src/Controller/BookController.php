@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class BookController extends AbstractController
 {
-
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -40,45 +39,33 @@ class BookController extends AbstractController
     {
         $user = $this->getUser();
         $book = new Book();
-
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($book->getCover() !== null) {
-                $file = $form->get('cover')->getData();
-                $fileName =  uniqid(). '.' .$file->guessExtension();
-
-                try {
-                    $file->move(
-                        $this->getParameter('images_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
+            if ($form->isSubmitted() && $form->isValid()){
+                if ($book->getCover() !== null) {
+                    $file = $form->get('cover')->getData();
+                    $fileName =  uniqid(). '.' .$file->guessExtension();
+                    try {
+                        $file->move(
+                            $this->getParameter('images_directory'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        return new Response($e->getMessage());
+                    }
+                    $book->setCover($fileName);
                 }
+                $book->setUser($user);
+                $book->setStatus(false);
+                $discountpercentage = 100 - (round(($book->getreducePrice() / $book->getNormalPrice()) * 100));
+                $book->setDiscountpercentage($discountpercentage);
+                $this->em->persist($book);
+                $this->em->flush();
+                $this->addFlash('success', "Votre livre a bien été enregistré, il est en attente d'être validé par notre équipe");
 
-                $book->setCover($fileName);
+                return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
             }
-
-        $book->setUser($user);
-
-        $book->setStatus(false);
-
-        $total = round(($book->getreducePrice() / $book->getNormalPrice()) * 100);
-
-        $totalprice = 100 - $total;
         
-        $book->setTotalprice($totalprice);
-        
-        $this->em->persist($book);
-        $this->em->flush();
-
-        $this->addFlash('success', "Votre livre a bien été enregistré, il est en attente d'être validé par notre équipe");
-        return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
-        }
-        
-
         return $this->render('book/newbook.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -90,38 +77,27 @@ class BookController extends AbstractController
      */
     public function Book(Request $request, Book $book, string $slug, CommentRepository $commentRepository): Response
     {
-        if ($book->getSlug() !== $slug)
-        {
+        if ($book->getSlug() !== $slug){
             return $this->redirectToRoute('book_show', [
                 'id' => $book->getId(),
                 'slug' => $book->getSlug()
             ], 301); 
         }
-
         $user = $this->getUser();
-       
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $comment->setUser($user);
-            $comment->setBook($book);
-            $comment->setDate(new \DateTime());
-            $comment->setStatus(true);
-            
-            $this->em->persist($comment);
-            $this->em->flush();
-
-            $totalnbcomments = $commentRepository->count(['book' => $book]);
-
-            $book->setNbcomments($totalnbcomments);
-
-            $this->em->persist($book);
-            $this->em->flush();
-
-        }
+            if ($form->isSubmitted() && $form->isValid()){
+                $comment->setUser($user);
+                $comment->setBook($book);
+                $comment->setDate(new \DateTime());
+                $comment->setStatus(true);
+                $this->em->persist($comment);
+                $this->em->flush();
+                $book->setNbcomments($commentRepository->count(['book' => $book]));
+                $this->em->persist($book);
+                $this->em->flush();
+            }
 
         return $this->render('book/book_show.html.twig', [
             'book'=> $book,
@@ -142,54 +118,39 @@ class BookController extends AbstractController
      */
     public function like(Book $book, BookLikeRepository $booklikeRepository, string $slug): Response 
     {
-        if ($book->getSlug() !== $slug) {
+        if ($book->getSlug() !== $slug){
             return $this->redirectToRoute('book_show', [
                 'id' => $book->getId(),
                 'slug' => $book->getSlug()
             ], 301);
         }
-
         $user = $this->getUser();
-        
         if(!$user) return $this->json([
             'code' => 403,
             'message' => 'Unauthorized'
         ], 403);
-
         if($book->isLikedByUser($user)){
             $booklike = $booklikeRepository->findOneBy([
                 'book' => $book,
                 'user' => $user
             ]);
-
             $this->em->remove($booklike);
             $this->em->flush();
-
-            $nblikes = $booklikeRepository->count(['book' => $book]);
-
-            $book->setNblikes($nblikes);
-
+            $book->setNblikes($booklikeRepository->count(['book' => $book]));
             $this->em->persist($book);
             $this->em->flush();
-
             return $this->json([
                 'code' => 200,
                 'message' => 'Like bien supprimé',
                 'likes' => $booklikeRepository->count(['book' => $book])
             ], 200);
         }
-
         $booklike = new BookLike();
         $booklike->setBook($book)
                  ->setUser($user);
-
         $this->em->persist($booklike);
         $this->em->flush();
-
-        $nblikes = $booklikeRepository->count(['book' => $book]);
-
-        $book->setNblikes($nblikes);
-
+        $book->setNblikes($booklikeRepository->count(['book' => $book]));
         $this->em->persist($book);
         $this->em->flush();
 
@@ -199,5 +160,4 @@ class BookController extends AbstractController
             'likes' => $booklikeRepository->count(['book' => $book])
         ], 200);
     }
-
 }

@@ -3,17 +3,125 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    <div id='admin' class="container admin">
+    <div class="container">
+        <h1>
+            Liste des livres à modérer
+        </h1>
         <div class="row">
-            <div class="col-md-3">
-                {# {{ include('partials/_adminmenu.html.twig') }} #}
-            </div>
-            <div class="col-md-9">
-                
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="align-middle text-center">
+                        <tr>
+                            <th>
+                                Id
+                                                            
+                            </th>
+                            <th>
+                                Couverture
+                                                            
+                            </th>
+                            <th>
+                                Titre
+                                                            
+                            </th>
+                            <th>
+                                Prix normal
+                                                            
+                            </th>
+                            <th>
+                            Prix en promo
+                                                            
+                            </th>
+                            <th>
+                                Début de la promo
+                                                            
+                            </th>
+                            <th>
+                                Fin de la promo
+                                                            
+                            </th>
+                            <th>
+                                % de réduction
+                                                            
+                            </th>
+                            <th>
+                                Nb commentaires
+                                                            
+                            </th>
+                            <th>
+                                Nb likes
+                                                            
+                            </th>
+                            <th>
+                                Status
+                                                            
+                            </th>
+                            <th>
+                                Actions
+                                                            
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr class="text-center">
+                                <td>
+                                    {{ book.id }}
+                                </td>
+                                <td>
+                                    <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('avatarbookshow')}}">
+                                </td>
+                                <td>
+                                    {{ book.title }}
+                                </td>
+                                
+                                <td>
+                                    {{ book.normalprice }}
+                                </td>
+                                <td>
+                                    {{ book.reduceprice }}
+                                </td>
+                                <td>
+                                    {{ book.startdate ? book.startdate|date('Y-m-d H:i:s') : '' }}
+                                </td>
+                                <td>
+                                    {{ book.enddate ? book.enddate|date('Y-m-d H:i:s') : '' }}
+                                </td>
+                                <td>
+                                    {{ book.discountpercentage }}
+                                </td>
+                                <td>
+                                    {{ book.nbcomments }}
+                                </td>
+                                <td>
+                                    {{ book.nblikes }}
+                                </td>
+                                <td>
+                                    {{ book.status ? 'Validé' : 'Bloqué' }}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('book_show', {'id': book.id, 'slug': null}) }}">
+                                        Voir
+                                                                            
+                                    </a>
+                                    <a class="btn btn-secondary" href="{{ path('book_edit', {'id': book.id, 'slug': null}) }}">
+                                        Editer
+                                                                            
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="17">
+                                    Aucune entrée trouvée
+                                                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-        
     </div>
-
-
 {% endblock %}
+

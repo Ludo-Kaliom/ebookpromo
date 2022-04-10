@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\BookRepository;
-use App\Repository\TypeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +14,6 @@ class MostpopularController extends AbstractController
     #[Route('/mostpopular', name: 'mostpopular')]
     public function mostpopular(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
-
         $data = $bookRepository->findBy(array
             ('status' => true,
              'nblikes' => true,
@@ -24,10 +22,7 @@ class MostpopularController extends AbstractController
         $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
         
         return $this->render('mostpopular/mostpopular.html.twig', [
-            'controller_name' => 'MostpopularController',
-            'books' => $data,
-            'paginates' => $paginates
-
+            'books' => $paginates,
         ]);
     }
 }

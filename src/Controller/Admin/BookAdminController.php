@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookAdminController extends AbstractController
 {
     #[Route('/', name: 'book_index', methods: ['GET'])]
-    
     public function index(BookRepository $bookRepository): Response
     {
         return $this->render('/admin/book/index.html.twig', [

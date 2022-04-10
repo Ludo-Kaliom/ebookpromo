@@ -1,43 +1,30 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}New Article{% endblock %}
+{% block title %}Nouvel article{% endblock %}
 
 {% block body %}
-<div class="container">
-<div class="row text-center">
-<h1>Nouvel Article</h1>
-</div>
-
-
-{{ form_start(form) }}
-
-
-    <div class="row">
-        <div class="col-md-6">{{ form_row(form.Title) }}
-        <span class="error">{{ form_errors(form.Title) }}</span>
+    <div class="container">
+        <div class="row text-center">
+            <h1>Nouvel Article</h1>
+        </div>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.Title) }}
+            <span class="error">{{ form_errors(form.Title) }}</span>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{ form_row(form.content | raw) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">{{ form_row(form.updated) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">{{ form_row(form.status) }}</div>
+        </div>
+        {{ form_rest(form) }}
+            <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+        {{ form_end(form) }}
+        <a class="btn btn-secondary" href="{{ path('article_index') }}">Retour à la liste des articles</a>
     </div>
-        
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">{{ form_row(form.content | raw) }}</div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">{{ form_row(form.updated) }}</div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">{{ form_row(form.status) }}</div>
-    </div>
-    
-    {{ form_rest(form) }}
-        <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
-    {{ form_end(form) }}
-
-    <a class="btn btn-secondary" href="{{ path('article_index') }}">Retour à la liste des articles</a>
-</div>
-
-    
-
 {% endblock %}
