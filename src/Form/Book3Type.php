@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class Book3Type extends AbstractType
@@ -101,7 +102,14 @@ class Book3Type extends AbstractType
                     'placeholder' => 'Nom du ou des auteurs, séparés par une virgule'
                 ]
             ])
-            ->add('status')
+            ->add('status', ChoiceType::class,[ 
+                'label' =>'Statut',
+                'choices' => [
+                  'Bloqué' => '0',
+                  'Publié' => '1'],
+                  'multiple'=>false,
+                  'expanded'=>true              
+              ])
             ->add('user')
         ;
     }

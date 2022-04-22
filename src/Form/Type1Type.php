@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class Type1Type extends AbstractType
@@ -17,7 +18,14 @@ class Type1Type extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom du type de livre'
             ])
-            ->add('status')
+            ->add('status', ChoiceType::class,[ 
+                'label' =>'Statut',
+                'choices' => [
+                  'Inactif' => '0',
+                  'Actif' => '1'],
+                  'multiple'=>false,
+                  'expanded'=>true              
+              ])
         ;
     }
 

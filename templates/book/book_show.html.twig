@@ -13,7 +13,7 @@
                     <h1>
                         {{ book.title }}
                     </h1>
-                    <div id="center" class="col-md-4">
+                    <div id="center" class="col-md-4 col-sm-2">
                         <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('bookshow')}}" alt="couverture de {{ book.title }}"></div>
 
                         <div class="col-md-8">
@@ -27,8 +27,8 @@
                                     {% endif %}
                                     - 
                                                                         
-                                    {% for category in book.subcategories %}
-                                        {{ category.name }}
+                                    {% for subcategory in book.subcategories %}
+                                         <a id='listlink' href="{{ path('subcategory_show',{id: subcategory.id, slug: subcategory.slug}) }}">{{ subcategory.name }}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="col text-end">

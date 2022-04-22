@@ -17,6 +17,11 @@
                     <div class="menuheader">
                         <a href="{{ path('newbook') }}">Proposer une promo</a>
                     </div>
+                    {% if is_granted('ROLE_MANAGER') %}
+                    <div class="menuheader">
+                        <a href="{{ path('admin') }}">Administration</a>
+                    </div>
+                    {% endif %}
                 {% else %}
                     <div class="menuheader">
                         <a href="{{ path('login') }}">Me connecter</a>

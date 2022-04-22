@@ -37,15 +37,14 @@ class CategoryController extends AbstractController
         }
         $id = $category->getId();
         $data = $category->getBooks($id);
-        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
-        $books = $bookRepository->findBy(array
-            ('category' => $id,
-            'status' => true
-            ), array('status' => 'ASC')
-        );
+        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        // $books = $bookRepository->findBy(array
+        //     ('category' => $id,
+        //     'status' => true
+        //     ), array('status' => 'ASC')
+        // );
 
         return $this->render('category/category_show.html.twig', [
-            'paginates' => $paginates,
             'category' => $category,
             'books' => $books
         ]);

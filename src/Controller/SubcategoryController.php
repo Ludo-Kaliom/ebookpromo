@@ -42,12 +42,11 @@ class SubcategoryController extends AbstractController
         $id = $subcategory->getId();
 
         $data = $subcategory->getSubcategorybook($id);
-        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);   
+        $books = $paginator->paginate($data, $request->query->getInt('page', 1), 11);   
 
         return $this->render('subcategory/subcategory_show.html.twig', [
-            'paginates' => $paginates,
             'subcategory' => $subcategory,
-            'books' => $data,
+            'books' => $books,
         ]);
     }
 }
