@@ -67,26 +67,30 @@ a:hover{
     font-weight: bold;
 }
 
+#fontlike{
+    font-size: 50px;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+#fontlike:hover{
+    font-size: 50px;
+    color: rgb(212, 198, 247);
+    text-decoration: none;
+}
+
 #linkcard{
     color: rgb(161, 152, 152);
     font-size: large;
 }
 
-.booklink{
-    background-color: rgb(168, 13, 13);
-    color: whitesmoke;
-    border-radius: 10px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-#link{
+.link{
     color:whitesmoke;
     font-weight: bold;
-    padding: 30px;
+    background-color: rgb(168, 13, 13);
 }
-
-.booklink:hover{
+.link:hover{
+    color:whitesmoke;
     background-color: rgb(151, 87, 87);
 }
 
@@ -143,13 +147,9 @@ a:hover{
 
 
 #listLinkType{
-    color: rgb(8, 1, 1);
-    font-size: 1em;
-    text-align: center;
     background-color: rgb(199, 188, 188);
-    border-radius: 15px;
     font-variant-caps: small-caps;
-    padding: 15px;
+    margin-top: 15px;
 }
 
 #listLinkType:hover{
@@ -222,3 +222,36 @@ a:hover{
 .page-link{
     background-color: rgb(147, 212, 17);
 }
+
+.pagination > li > a
+{
+background-color: rgb(37, 33, 33);
+color: whitesmoke;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+color: black;
+background-color: #eee;
+border-color: #ddd;
+}
+.pagination > .active > a
+{
+color: white;
+background-color: #ddd;;
+border: solid 1px #ddd;;
+}
+.pagination > .active > a:hover
+{
+background-color: #ddd;;
+border: solid 1px #ddd;;
+}
+
+.page-item.active .page-link {
+z-index: 3;
+color: #fff;
+background-color: rgb(62, 52, 52);
+border-color: #ddd;;
+  }

@@ -1,41 +1,21 @@
-{% for book in books %}{% if book.status is same as true %}
-    <div class="col-md-3">
-        
-        <div class="card h-100 flex-fill">
-            <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
+{% for book in books %} {# Boucle for qui permet de d'afficher le résultat correspondant à un livre #}
+    {% if book.status is same as true %} {# Condition if qui vérifie si le status du livre est bien égale à true pour n'afficher que les livres qui ont été validés #}
+        <div class="col-md-6 col-sd-12 col-lg-4">
+            <div class="card h-100 flex-fill">
+                <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
                 <img src="{{ asset('/uploads/' ~ book.cover)| imagine_filter('scale') }}" class="card-img-top" alt="couverture de {{ book.title }}"></a>
-                <div class="card-body d-grid gap-2">
-
-                    <p class="card-title">
-                        <span class="reduceprice">
-                            {{ book.reduceprice }}
-                            €
-                        </span>
-                        au lieu de 
-                        <span class="normalprice">
-                            {{ book.normalprice }}
-                            €
-                        </span>
-                    </p>
-
-                    <div class="linkseller">
-                        <a class="align-items-center" id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">
-                            En savoir plus
-                        </a>
+                    <div class="card-body d-grid gap-2">
+                        <p class="card-title"><span class="reduceprice">{{ book.reduceprice }}€</span> au lieu de <span class="normalprice">{{ book.normalprice }} €</span></p>
+                        <div>
+                            <a id="link" class="btn btn-lg link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}">En savoir plus</a>
+                        </div>
+                        <p class="card-text">expire le {{ book.enddate | date('d/m/Y') }}</p>
                     </div>
-
-                    <p class="card-text">
-                        expire le 
-                        {{ book.enddate | date('d/m/Y') }}
-                    </p>
-                </div>
             </div>
-        
         </div>
-        {% endif %}
-    {% endfor %}
-
-    <div id='link' class="pagination justify-content-center">
-        {{ knp_pagination_render(books) }}
-    </div>
+    {% endif %}{# Fin de la condition if #}
+{% endfor %}{# Fin de la boucle for #}
+<div id='link' class="pagination justify-content-center">
+    {{ knp_pagination_render(books, '/partials/_pagination.html.twig') }}
+</div>
     

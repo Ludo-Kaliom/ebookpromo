@@ -14,7 +14,7 @@
                             <th>Titre</th>
                             <th>Date</th>
                             <th>Status</th>
-                            <th>actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,8 +25,8 @@
                                 <td>{{ article.updated ? article.updated|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ article.status ? 'Publié' : 'Non publié' }}</td>
                                 <td>
-                                    <a href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">Voir l'article</a>
-                                    <a href="{{ path('article_edit', {'id': article.id}) }}">Editer</a>
+                                    <a class="btn btn-primary" href="{{ path('article_show', {'id': article.id, 'slug': article.slug}) }}">Voir l'article</a>
+                                    <a class="btn btn-secondary" href="{{ path('article_edit', {'id': article.id}) }}">Editer</a>
                                 </td>
                             </tr>
                         {% else %}

@@ -3,189 +3,136 @@
 {% block title book.title %}
 
 {% block body %}
-
     <div class="container">
-
         <div class="row">
-            {{ include('partials/_menu.html.twig') }}
-            <div class="col-md-9">
-                <div class="row">
-                    <h1>
-                        {{ book.title }}
-                    </h1>
-                    <div id="center" class="col-md-4 col-sm-2">
-                        <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('bookshow')}}" alt="couverture de {{ book.title }}"></div>
-
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col">
-                                    {% if book.category.id is defined and book.category.id is not null %}
-                                        <a id='listlink' href="{{ path('category_show', {id: book.category.id, slug: book.category.slug}) }}">
-                                            {{ book.category }}
-                                        </a>
-
-                                    {% endif %}
-                                    - 
-                                                                        
-                                    {% for subcategory in book.subcategories %}
-                                         <a id='listlink' href="{{ path('subcategory_show',{id: subcategory.id, slug: subcategory.slug}) }}">{{ subcategory.name }}</a>
-                                    {% endfor %}
-                                </div>
-                                <div class="col text-end">
-                                    {% if book.type.id is defined and book.type.id is not null %}
-                                        <a id='listlink' href="{{ path('type_show',{id: book.type.id, slug: book.type.slug}) }}">
-                                            {{ book.type.name }}
-                                        </a>
-
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div id="username" class="col">
-                                    {{ book.authors }}
-                                </div>
-                                <div id="username" class="col text-end">
-                                    {{ book.publisher }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="description" class="col mt-4">
-                                    {{ book.description|raw }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="col-md-12 col-sm-12 col-lg-3">
+                {{ include('partials/_menu.html.twig') }}
+            </div>
+                <div class="col-md-6 col-sm-12 col-lg-9">
                     <div class="row">
-                        <div id="bookcontributor" class="col-md-4">
-                            <img id="avatar" src="{{asset('/uploads/' ~ book.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ book.user.username }}"></br>
-                            <span id="username">
-                                {{ book.user.username }}
-                            </span>
-
+                        <h1>{{ book.title }}</h1>
+                        <div id="center" class="col-md-4 col-sm-2">
+                            <img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('bookshow')}}" alt="couverture de {{ book.title }}">
                         </div>
-
-                        <div id="info" class="col">
-                            <span class="reduceprice">
-                                {{ book.reducePrice }}
-                                €
-                                                            
-                            </span>
-                            au lieu de 
-                                                        
-                            <span class="normalprice">
-                                {{ book.normalPrice }}
-                                € 
-                                                            
-                            </span>
-                        </br>
-                        <span class="reduceprice">
-                            {{ book.discountpercentage }}
-                            %
-                                                    
-                        </span>
-                        de réduction
-                                                                    
-                                            
-                    </div>
-
-                    <div id="info" class="col">
-                        <div class="row">
-                            <div id="center" class="col">
-                                expire le 
-                                                                
-                                {{ book.endDate | date('d/m/Y') }}
-                            </br>
-                            <div class="linkseller">
-                                <a id="link" href="{{ path('app_logout') }}">
-                                    J'en profite !
-                                                                    
-                                </a>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col">
+                                        {% if book.category.id is defined and book.category.id is not null %}
+                                            <a id='listlink' href="{{ path('category_show', {id: book.category.id, slug: book.category.slug}) }}">{{ book.category }}</a>
+                                        {% endif %}-                                    
+                                        {% for subcategory in book.subcategories %}
+                                            <a id='listlink' href="{{ path('subcategory_show',{id: subcategory.id, slug: subcategory.slug}) }}">{{ subcategory.name }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col text-end">
+                                        {% if book.type.id is defined and book.type.id is not null %}
+                                            <a id='listlink' href="{{ path('type_show',{id: book.type.id, slug: book.type.slug}) }}">{{ book.type.name }}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div id="username" class="col">
+                                        {{ book.authors }}
+                                    </div>
+                                    <div id="username" class="col text-end">
+                                        {{ book.publisher }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="description" class="col mt-4">
+                                        {{ book.description|raw }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div id="bookcontributor" class="col-md-4">
+                                {% if book.user.avatar is same as(null) %}
+                                    <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ book.user.username }}"></br>
+                                {% else %}
+                                    <img id="avatar" src="{{asset('/uploads/' ~ book.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ book.user.username }}"></br>
+                                {% endif %}
+                                <span id="username">{{ book.user.username }}</span>
+                            </div>
+                            <div id="info" class="col">
+                                <span class="reduceprice">{{ book.reducePrice }} €</span> au lieu de <span class="normalprice">{{ book.normalPrice }} €</span>
+                                </br>
+                                <span class="reduceprice">{{ book.discountpercentage }} %</span> de réduction                  
+                            </div>
+                            <div id="info" class="col">
+                                <div class="row">
+                                    <div id="center" class="col">expire le {{ book.endDate | date('d/m/Y') }}</br>
+                                        <div>
+                                        <a id="link" class="btn btn-lg link" href="{{ book.link }}">J'en profite !</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# Réseaux sociaux et likes #}
+                        <div id="center" class="row mt-4">
+                            {{ include('partials/_social_networks.html.twig') }}
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {# Réseaux sociaux et likes #}
-            <div id="center" class="row mt-4">
-                {{ include('partials/_social_networks.html.twig') }}
-            </div>
         </div>
-
-    </div>
-    {# poster un commentaire #}
-    {% if app.user %}
-        <div class="row">
-            <div class="col-md-3 d-grid"></div>
-            <div id="center" class="col-md-3">
-                <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
-                {{ app.user.username }}
-            </div>
-            <div id="commentform" class="col-md-6">
-                {{ form_start(comment_form) }}
-
-                {{ form_row(comment_form.content) }}
-
-                {{ form_rest(comment_form) }}
-                <div id="button">
-                    <button class="btn btn-primary">
-                        {{ button|default('Commenter') }}
-                    </button>
-                </div>
-                {{ form_end(comment_form) }}
-            </div>
-        </div>
-    {% endif %}
-
-    {# afficher commentaires #}
-    <div class="row">
-        {% if book.comments | length > 1 %}
-            <h2>
-                {{ book.comments | length }}
-                Commentaires
-                            
-            </h2>
-        {% elseif book.comments | length > 0 %}
-            <h2>
-                {{ book.comments | length }}
-                Commentaire
-                            
-            </h2>
-        {% else %}
-            <h2>
-                Aucun commentaire n'a été posté
-                            
-            </h2>
-        {% endif %}
-        {% for comment in book.comments %}
-            {% if comment.status is same as(true) %}
-                <div class="row mt-4">
-                    <div class="col-md-3 d-grid"></div>
+        {# poster un commentaire #}
+        <div class="container">
+            {% if app.user %}
+                <div class="row mt-15">
                     <div id="center" class="col-md-3">
-                        <img id="avatar" src="{{asset('/uploads/' ~ book.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ comment.user.username }}"></br>
-                        {{ comment.user.username }}
+                        <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                        {{ app.user.username }}
                     </div>
-
-                    <div class="col">
-                        <div class="row">
-                            <div class="col text-end">
-                                le 
-                                                                
-                                {{ comment.date | date('d/m/Y') }}
-                            </div>
+                    <div id="commentform" class="col-md-9">
+                        {{ form_start(comment_form) }}
+                        {{ form_row(comment_form.content) }}
+                        {{ form_rest(comment_form) }}
+                        <div id="button">
+                            <button class="btn btn-primary">
+                                {{ button|default('Commenter') }}
+                            </button>
                         </div>
-
-                        <div class="row">
-                            <div id="commenttext" class="col">
-                                {{ comment.content | raw }}
-                            </div>
-                        </div>
+                        {{ form_end(comment_form) }}
                     </div>
                 </div>
             {% endif %}
-        {% endfor %}
+        {# afficher commentaires #}
+                {% if book.comments | length > 1 %}
+                    <h2>{{ book.comments | length }} Commentaires</h2>
+                {% elseif book.comments | length > 0 %}
+                    <h2>{{ book.comments | length }} Commentaire</h2>
+                {% else %}
+                    <h2>Aucun commentaire n'a été posté</h2>
+                {% endif %}
+                {% for comment in book.comments %}
+                    {% if comment.status is same as(true) %}
+                        <div class="row mt-15">
+                            <div class="col-md-12 d-grid"></div>
+                                <div id="center" class="col-md-3">
+                                    {% if comment.user.avatar is same as(null) %}
+                                        <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ comment.user.username }}"></br>
+                                    {% else %}
+                                        <img id="avatar" src="{{asset('/uploads/' ~ comment.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ comment.user.username }}"></br>
+                                    {% endif %}
+                                    {{ comment.user.username }}
+                                </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col text-end">
+                                        le {{ comment.date | date('d/m/Y') }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="commenttext" class="col">
+                                        {{ comment.content | raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+        </div>
     </div>
-</div>{% endblock %}
+{% endblock %}

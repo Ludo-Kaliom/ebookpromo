@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Amp\Http\Status;
 use App\Entity\Subcategory;
 use App\Repository\BookRepository;
 use App\Repository\SubcategoryRepository;

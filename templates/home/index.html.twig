@@ -2,17 +2,22 @@
 
 {% block body %}
     <div class="container">
-    {% for message in app.flashes('success') %}
-
-    <div class="alert alert-success">
-        {{ message }}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
     </div>
-
-    {% endfor %}
+    <div class="container">
         <div class="row">
-            {{ include('partials/_menu.html.twig') }}
-            {{ include('partials/_listbooks.html.twig') }}
+            <div class="col-md-12 col-sm-12 col-lg-3">
+                {{ include('partials/_menu.html.twig') }}
+            </div>
+            <div class="col">
+                <div class="row">
+                    {{ include('partials/_listbooks.html.twig') }}
+                </div>
+            </div>
         </div>
     </div>
-    
 {% endblock %}

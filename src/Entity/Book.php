@@ -7,7 +7,6 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
@@ -418,7 +417,7 @@ class Book
         return $this;
     }
 
-          /**
+    /**
      * Generates the magic method
      * 
      */

@@ -3,21 +3,21 @@
 {% block title "Toutes les catégories des livres numériques" %}
 
 {% block body %}
-
     <div class="container">
-
         <div class="row">
-            {{ include('partials/_menu.html.twig') }}
-            <div class="col-md-9">
-                <h1>Toutes les catégories de livres</h1>
-                {% for category in categories %}
-                <h3>{{ category.name }}</h3>
-                    
-                <a id='listlink' href="{{ path('category_show',{id: category.id, slug: category.slug}) }}">
-               {{ category.books | length }} Livres référencés dans cette catégorie</a>
-                    
-            {% endfor %}
+            <div class="col-md-12 col-sm-12 col-lg-3">
+                {{ include('partials/_menu.html.twig') }}
+            </div>
+            <div class="col">
+                <div class="row">
+                    <h1>Toutes les catégories de livres</h1>
+                    {% for category in categories %}
+                        <h3>{{ category.name }}</h3>
+                        <a id='listlink' href="{{ path('category_show',{id: category.id, slug: category.slug}) }}">
+                        {{ category.books | length }} Livres référencés dans cette catégorie</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-
+    </div>
 {% endblock %}

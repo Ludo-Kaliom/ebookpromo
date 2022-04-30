@@ -1,25 +1,21 @@
-<div id="center" class="row mt-4">
-    <div class="col">
-        icônes partage réseaux sociaux
-            <a href="{{ path('book_like', {id: book.id, slug: book.slug}) }}" class="btn btn-link js-like">
-    
-    
-                {% if app.user and book.isLikedByUser(app.user) %}
-                    <i class="fas fa-thumbs-up"></i>
-                {% else %}
-                    <i class="far fa-thumbs-up"></i>
-                {% endif %}
-
-            <span class="js-likes">{{ book.booklikes | length }}
-            </span>
-                
-
-            <span class="js-label">
-                J'aime     
-            </span>
+<div id="center" class="row mt-9">
+    <div class="col-6">
+        <img src="/images/facebook.png" alt="facebook">
+        <img src="/images/twitter.png" alt="twitter">
+        <img src="/images/linkedin.png" alt="linkedin">
+        <img src="/images/pinterest.png" alt="logo">
+    </div>
+    <div class="col-6">
+        <a id="link" href="{{ path('book_like', {id: book.id, slug: book.slug}) }}" class="btn btn-link js-like">
+            <span id="fontlike" class="js-likes">{{ book.booklikes | length }} </span>  
+            {% if app.user and book.isLikedByUser(app.user) %}
+                <i id="fontlike" class="fas fa-thumbs-up"></i>
+            {% else %}
+                <i id="fontlike" class="far fa-thumbs-up"></i>
+            {% endif %}
+            
         </a>
     </div>
-    <div class="col"></div>
 </div>
 
 {% block javascripts %}

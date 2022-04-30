@@ -15,7 +15,11 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="row">
-                    <img id="avatar" src="/uploads/{{ app.user.avatar }}" alt="avatar de {{ app.user.username }}">
+                    {% if app.user.avatar is same as(null) %}
+                        <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                    {% else %}
+                        <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                    {% endif %}
                     <br>
                         <div class="div">{{ app.user.username }}</div>
                 </div>

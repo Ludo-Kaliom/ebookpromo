@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Book;
-use App\Entity\Subcategory;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -72,7 +70,7 @@ class BookRepository extends ServiceEntityRepository
             ->andWhere('b.status = :val')
             ->setParameter('val', true)
             ->orderBy('b.id', 'ASC')
-            ->setMaxResults(4)
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;

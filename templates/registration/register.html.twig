@@ -22,6 +22,8 @@
 
         <div id="margin" class="col-md-6">{{ form_row(registrationForm.agreeTerms) }}</div>
 
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
         {{ form_rest(registrationForm) }}
         <div id="margin" class="col-md-6">
             <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>

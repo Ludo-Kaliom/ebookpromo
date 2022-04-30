@@ -3,11 +3,17 @@
 {% block title type.name %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <h1>Tous les livres disponibles dans le type {{ type.name }}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-3">
             {{ include('partials/_menu.html.twig') }}
-            {{ include('partials/_listbooks.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="row">
+                <h1>Tous les livres disponibles dans le type {{ type.name }}</h1>
+                {{ include('partials/_listbooks.html.twig') }}
+            </div>
         </div>
     </div>
+</div> 
 {% endblock %}

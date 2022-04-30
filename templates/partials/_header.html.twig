@@ -1,51 +1,42 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-2"><img src="/images/logo.png" alt="logo"></div>
-        <div class="col-md-8">{% for book in books %}
-    <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}"><img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('headerbookshow')}}" alt="{{ book.title }}"></a>
+        <div class="col-md-2 my-auto"><img src="/images/logo.png" alt="logo"></div>
+        <div class="col-md-8">
+            {% for book in books %}
+                <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}"><img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('headerbookshow')}}" alt="{{ book.title }}"></a>
             {% endfor %}
-    </div>
+        </div>
         <div class="col-md-2">
-            <div class="menuheader">
-                {% if app.user %}
-                    <div class="menuheader">
-                        <a href="{{ path('account') }}">Mon compte</a>
-                    </div>
-                    <div class="menuheader">
-                        <a href="{{ path('app_logout') }}">Me déconnecter</a>
-                    </div>
-                    <div class="menuheader">
-                        <a href="{{ path('newbook') }}">Proposer une promo</a>
-                    </div>
-                    {% if is_granted('ROLE_MANAGER') %}
+            {% if app.user %} {# Début de la condition qui n'affiche les menus qu'à un utilisateur authentifié #}
+                <div class="menuheader">
+                    <a href="{{ path('account') }}">Mon compte</a>
+                </div>
+                <div class="menuheader">
+                    <a href="{{ path('app_logout') }}">Me déconnecter</a>
+                </div>
+                <div class="menuheader">
+                    <a href="{{ path('newbook') }}">Proposer une promo</a>
+                </div>
+                {% if is_granted('ROLE_ADMIN') %} {# Sous-condition permet de restreindre l'affichage du lien menant à l'administration uniquement à un utilisateur ayant le rôle ADMIN #}
                     <div class="menuheader">
                         <a href="{{ path('admin') }}">Administration</a>
                     </div>
-                    {% endif %}
-                {% else %}
-                    <div class="menuheader">
-                        <a href="{{ path('login') }}">Me connecter</a>
-                    </div>
-                    <div class="menuheader">
-                        <a href="{{ path('app_register') }}">M'inscrire</a>
-                    </div>
                 {% endif %}
-                    
-            </div>
+            {% else %} {# Si l'utilisateur n'est pas connecté, il ne peut accéder qu'aux deux menus suivants #}
+                <div class="menuheader">
+                    <a href="{{ path('login') }}">Me connecter</a>
+                </div>
+                <div class="menuheader">
+                    <a href="{{ path('app_register') }}">M'inscrire</a>
+                </div>
+            {% endif %}{# Fin de la condition #}
         </div>
     </div>
     <div id='listType' class="row">
         <div>
             {% for type in types %}
-                <a id='listLinkType' href="{{ path('type_show',{id: type.id, slug: type.slug}) }}">{{ type.name }}</a>
+                <a id='listLinkType' href="{{ path('type_show',{id: type.id, slug: type.slug}) }}" class="btn btn-lg">{{ type.name }}</a>
             {% endfor %}
         </div>
     </div>
-</div>
-
-<div class="container">
-    <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-    </nav>
 </div>

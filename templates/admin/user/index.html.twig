@@ -26,7 +26,13 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.username }}</td>
-                <td><img src="/uploads/{{ user.avatar }}"></td>
+                <td>
+                    {% if user.avatar is same as(null) %}
+                        <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}"></br>
+                    {% else %}
+                        <img id="avatar" src="{{asset('/uploads/' ~ user.avatar)| imagine_filter('avatarbookshow')}}"></br>
+                    {% endif %}
+                </td>
                 <td>{{ user.registrationdate ? user.registrationdate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.updated ? user.updated|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.subscription ? 'Abonné' : 'Non abonné' }}</td>

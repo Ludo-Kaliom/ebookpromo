@@ -25,48 +25,57 @@ class BookType extends AbstractType
 
         ->add('title', TextType::class, [
             'label' => "Titre",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Titre du livre"
             ]
         ])
         ->add('isbn', TextType::class,  [
             'label' => "ISBN",
+            'required' => true,
             'attr' => [
                 'placeholder' => "ISBN du livre"
             ]
         ])
         ->add('description', TextareaType::class, [
             'label' => "Résumé",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Quatrième de couverture du livre"
             ]
         ])
         ->add('cover', FileType::class, [
-            'label' => 'Image de couverture'
+            'label' => 'Image de couverture',
+            'required' => true
         ])
         ->add('normalPrice', MoneyType::class, [
             'label' => "Prix normal du livre",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Prix du livre avant réduction"
             ]
         ])
         ->add('reducePrice', MoneyType::class, [
             'label' => "Prix du livre après promotion",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Prix du livre pendant la promotion"
             ]
         ])
         ->add('startDate', DateType::class, [
             'label' => "Date de début de la promotion",
+            'required' => true,
             'data' => new \DateTime()
 
         ])
         ->add('endDate', DateType::class, [
             'label' => "Date de fin de la promotion",
+            'required' => true,
             'data' => new \DateTime()
         ])
         ->add('link', UrlType::class, [
             'label' => "Où trouver la promotion",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Lien vers un site de vente"
             ]
@@ -95,18 +104,18 @@ class BookType extends AbstractType
         ])
         ->add('publisher', TextType::class, [
             'label' => "Editeur",
+            'required' => true,
             'attr' => [
                 'placeholder' => "Nom de la maison d'édition"
             ]
         ])
         ->add('authors', TextType::class, [
             'label' => "Auteurs",
+            'required' => true,
             'attr' => [
                 'placeholder' => 'Nom du ou des auteurs, séparés par une virgule'
             ]
         ])
-
-
         ;
     }
 

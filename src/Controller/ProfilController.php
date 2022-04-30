@@ -26,19 +26,17 @@ class ProfilController extends AbstractController
         //Avatar
         $formavatar->handleRequest($request);
             if ($formavatar->isSubmitted() && $formavatar->isValid()){
-                if ($user->getAvatar() !== null) {
-                    $file = $formavatar->get('avatar')->getData();
-                    $fileName =  uniqid(). '.' .$file->guessExtension();
-                    try {
-                        $file->move(
-                            $this->getParameter('images_directory'),
-                            $fileName
-                        );
-                    } catch (FileException $e) {
-                        return new Response($e->getMessage());
-                    }
-                    $user->setAvatar($fileName);
+                $file = $formavatar->get('avatar')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
                 }
+                $user->setAvatar($fileName);
                 $user->setUpdated(new \DateTime());
                 $em->flush();
                 $this->addFlash('success', 'Votre avatar a bien été modifié');
