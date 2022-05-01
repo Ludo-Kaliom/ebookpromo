@@ -38,6 +38,14 @@ class UserAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('plainPassword') !== null){
+                $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('plainPassword')->getData()
+                    )
+                );
+            }
 
             $user->setUpdated(new \DateTime());
 

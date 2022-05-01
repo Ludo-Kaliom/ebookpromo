@@ -20,7 +20,7 @@
             <tr class="text-center">
                 <td>{{ type.id }}</td>
                 <td>{{ type.name }}</td>
-                <td>{{ type.status ? 'Actif' : 'Inactif' }}</td>
+                <td>{{ type.status ? 'Publié' : 'Non publié' }}</td>
                 <td>
                 <a class="btn btn-primary" href="{{ path('type_show', {'id': type.id, 'slug':null}) }}" role="button">Voir</a>
                 <a class="btn btn-secondary" href="{{ path('type_edit', {'id': type.id, 'slug':null}) }}" role="button">Editer</a>

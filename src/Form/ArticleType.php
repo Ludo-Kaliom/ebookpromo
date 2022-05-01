@@ -23,10 +23,13 @@ class ArticleType extends AbstractType
             ])
             ->add('updated', DateType::class, [
                 "label" => "Date"
-            ]
-            )
+            ])
             ->add('status', CheckboxType::class, [
-                "label" => "Publié ou non publié"
+                'label' => "En ligne",
+                'required'   => false,
+                'label_attr' => [
+                'class' => 'checkbox-switch',
+                ],
             ])
             ->add('content', CKEditorType::class)
             ->add('user', EntityType::class, [

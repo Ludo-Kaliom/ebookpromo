@@ -22,7 +22,7 @@
                 <td>{{ comment.id }}</td>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.date ? comment.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ comment.status ? 'Actif' : 'Bloqué' }}</td>
+                <td>{{ comment.status ? 'Publié' : 'Bloqué' }}</td>
                 <td>
                     <a class="btn btn-secondary" href="{{ path('comment_edit', {'id': comment.id}) }}">Editer</a>
                 </td>

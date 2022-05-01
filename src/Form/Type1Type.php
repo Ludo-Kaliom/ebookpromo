@@ -18,14 +18,13 @@ class Type1Type extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom du type de livre'
             ])
-            ->add('status', ChoiceType::class,[ 
-                'label' =>'Statut',
-                'choices' => [
-                  'Inactif' => '0',
-                  'Actif' => '1'],
-                  'multiple'=>false,
-                  'expanded'=>true              
-              ])
+            ->add('status', CheckboxType::class, [
+                'label' => "Publier",
+                'required'   => false,
+                'label_attr' => [
+                'class' => 'checkbox-switch',
+                ],
+            ])
         ;
     }
 

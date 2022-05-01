@@ -40,6 +40,7 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.status = :val')
+            ->andWhere('b.nbcomments > 0')
             ->orderBy('b.nbcomments', 'DESC')
             ->setParameter('val', $value)
             ->getQuery()
@@ -54,6 +55,7 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.status = :val')
+            ->andWhere('b.nblikes > 0')
             ->orderBy('b.nblikes', 'DESC')
             ->setParameter('val', $value)
             ->getQuery()

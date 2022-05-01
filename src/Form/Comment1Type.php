@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class Comment1Type extends AbstractType
 {
@@ -15,14 +16,14 @@ class Comment1Type extends AbstractType
         $builder
             ->add('content')
             ->add('date')
-            ->add('status', ChoiceType::class,[ 
-                'label' =>'Statut',
-                'choices' => [
-                  'Bloqué' => '0',
-                  'Autorisé' => '1'],
-                  'multiple'=>false,
-                  'expanded'=>true              
-              ])
+            ->add('book')
+            ->add('status', CheckboxType::class, [
+                'label' => "Autoriser",
+                'required'   => false,
+                'label_attr' => [
+                'class' => 'checkbox-switch',
+                ],
+            ])
             ->add('user')
         ;
     }

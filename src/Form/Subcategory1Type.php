@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class Subcategory1Type extends AbstractType
 {
@@ -17,14 +18,13 @@ class Subcategory1Type extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom de la catégorie'
             ])
-            ->add('status', ChoiceType::class,[ 
-                'label' =>'Statut',
-                'choices' => [
-                  'Inactive' => '0',
-                  'Active' => '1'],
-                  'multiple'=>false,
-                  'expanded'=>true              
-              ])
+            ->add('status', CheckboxType::class, [
+                'label' => "Publier",
+                'required'   => false,
+                'label_attr' => [
+                'class' => 'checkbox-switch',
+                ],
+            ])
         ;
     }
 

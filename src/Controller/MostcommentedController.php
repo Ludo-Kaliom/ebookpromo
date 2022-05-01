@@ -15,14 +15,8 @@ class MostcommentedController extends AbstractController
     public function mostcommented(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
 
-        $data = $bookRepository->findBy(
-            array(
-                'status' => true,
-                'nbcomments' => true,
-            ),
-            array('nbcomments' => 'ASC')
-        );
-        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 11);
+        $data = $bookRepository->findMostCommented(true);
+        $paginates = $paginator->paginate($data, $request->query->getInt('page', 1), 12);
 
         return $this->render('mostcommented/mostcommented.html.twig', [
             'books' => $paginates,

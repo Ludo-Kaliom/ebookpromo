@@ -14,7 +14,7 @@ class BestdiscountsController extends AbstractController
     #[Route('/bestdiscounts', name: 'bestdiscounts')]
     public function bestsdiscounts(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $books = $paginator->paginate($bookRepository->findBestDiscounts(true), $request->query->getInt('page', 1), 11);
+        $books = $paginator->paginate($bookRepository->findBestDiscounts(true), $request->query->getInt('page', 1), 12);
 
         return $this->render('bestdiscounts/bestdiscounts.html.twig', [
             'controller_name' => 'BestdiscountsController',

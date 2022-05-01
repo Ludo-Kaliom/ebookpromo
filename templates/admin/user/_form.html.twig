@@ -2,12 +2,18 @@
 
     <div class="row">
         <div class="col-md-6">{{ form_row(form.email, { 'label' : 'Email'}) }}</div>
-        <div class="col-md-6">{{ form_row(form.password, {'label' : 'Password' }) }}</div>
+        <div class="col-md-6">{{ form_row(form.plainPassword, {'label' : 'Password' }) }}</div>
     </div>
-
+ 
     <div class="row">
+        <div class="col-md-6">
+            {% if user.avatar is same as(null) %}
+                <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}"></br>
+            {% else %}
+            <img id="avatar" src="{{asset('/uploads/' ~ user.avatar)| imagine_filter('avatarbookshow')}}"></br>
+            {% endif %}
+        </div>
         <div class="col-md-6">{{ form_row(form.username, {'label' : 'Pseudonyme' }) }}</div>
-        <div class="col-md-6">{{ form_row(form.avatar, {'label' : 'Avatar' }) }}</div>
     </div>
 
     <div class="row">
@@ -16,8 +22,8 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">{{ form_row(form.status, {'label' : 'activer ou désactiver'}) }}</div>
-    <div class="col-md-6">{{ form_row(form.subscription, {'label' : 'abonné ou non abonné'}) }}</div>
+        <div class="col-md-6">{{ form_row(form.status) }}</div>
+        <div class="col-md-6">{{ form_row(form.subscription) }}</div>
     </div>
 
     <button class="btn btn-primary">{{ button_label|default('Save') }}</button>

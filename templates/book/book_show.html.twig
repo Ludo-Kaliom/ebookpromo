@@ -82,7 +82,11 @@
             {% if app.user %}
                 <div class="row mt-15">
                     <div id="center" class="col-md-3">
-                        <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                        {% if app.user.avatar is same as(null) %}
+                            <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.avatar }}"></br>
+                        {% else %}
+                            <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.avatar }}"></br>
+                        {% endif %}</br>
                         {{ app.user.username }}
                     </div>
                     <div id="commentform" class="col-md-9">

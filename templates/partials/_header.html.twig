@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2 my-auto"><img src="/images/logo.png" alt="logo"></div>
-        <div class="col-md-8">
+        <div class="col-md-8 mx-auto d-none d-md-block">
             {% for book in books %}
-                <a id="link" href="{{ path('book_show', {id: book.id, slug: book.slug}) }}"><img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('headerbookshow')}}" alt="{{ book.title }}"></a>
+                <a href="{{ path('book_show', {id: book.id, slug: book.slug}) }}"><img src="{{asset('/uploads/' ~ book.cover)| imagine_filter('headerbookshow')}}" alt="{{ book.title }}"></a>
             {% endfor %}
         </div>
         <div class="col-md-2">

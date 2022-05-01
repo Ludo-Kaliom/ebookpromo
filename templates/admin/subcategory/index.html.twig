@@ -21,7 +21,7 @@
             <tr class="text-center">
                 <td>{{ subcategory.id }}</td>
                 <td>{{ subcategory.name }}</td>
-                <td>{{ subcategory.status ? 'Yes' : 'No' }}</td>
+                <td>{{ subcategory.status ? 'Publiée' : 'Non publiée' }}</td>
                 <td>
                     {# <a href="{{ path('subcategory_show', {'id': subcategory.id}) }}">show</a> #}
                     <a class="btn btn-secondary" href="{{ path('subcategory_edit', {'id': subcategory.id, slug:null}) }}">edit</a>
