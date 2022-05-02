@@ -71,7 +71,7 @@ class BookRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('b')
             ->andWhere('b.status = :val')
             ->setParameter('val', true)
-            ->orderBy('b.id', 'ASC')
+            ->orderBy('b.id', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
             ->getResult()

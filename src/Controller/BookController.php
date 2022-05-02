@@ -124,11 +124,13 @@ class BookController extends AbstractController
                 'slug' => $book->getSlug()
             ], 301);
         }
+
         $user = $this->getUser();
         if(!$user) return $this->json([
             'code' => 403,
             'message' => 'Unauthorized'
         ], 403);
+
         if($book->isLikedByUser($user)){
             $booklike = $booklikeRepository->findOneBy([
                 'book' => $book,
@@ -145,6 +147,7 @@ class BookController extends AbstractController
                 'likes' => $booklikeRepository->count(['book' => $book])
             ], 200);
         }
+
         $booklike = new BookLike();
         $booklike->setBook($book)
                  ->setUser($user);
@@ -153,7 +156,6 @@ class BookController extends AbstractController
         $book->setNblikes($booklikeRepository->count(['book' => $book]));
         $this->em->persist($book);
         $this->em->flush();
-
         return $this->json([
             'code' => 200,
             'message' => 'Like bien ajouté',
