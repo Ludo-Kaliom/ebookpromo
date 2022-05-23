@@ -60,12 +60,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
     private $article;
 
+    #[ORM\OneToMany(mappedBy: 'username', targetEntity: Answer::class)]
+    private $answers;
+
+    #[ORM\OneToMany(mappedBy: 'username', targetEntity: Message::class)]
+    private $messages;
+
+    #[ORM\OneToMany(mappedBy: 'adminname', targetEntity: Message::class)]
+    private $adminmessages;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
         $this->Comments = new ArrayCollection();
         $this->bookLikes = new ArrayCollection();
         $this->article = new ArrayCollection();
+        $this->answers = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->adminmessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -335,6 +347,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($article->getUser() === $this) {
                 $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setUsername($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getUsername() === $this) {
+                $answer->setUsername(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUsername($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getUsername() === $this) {
+                $message->setUsername(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getAdminmessages(): Collection
+    {
+        return $this->adminmessages;
+    }
+
+    public function addAdminmessage(Message $adminmessage): self
+    {
+        if (!$this->adminmessages->contains($adminmessage)) {
+            $this->adminmessages[] = $adminmessage;
+            $adminmessage->setAdminname($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdminmessage(Message $adminmessage): self
+    {
+        if ($this->adminmessages->removeElement($adminmessage)) {
+            // set the owning side to null (unless already changed)
+            if ($adminmessage->getAdminname() === $this) {
+                $adminmessage->setAdminname(null);
             }
         }
 

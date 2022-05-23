@@ -83,11 +83,15 @@ class Book
     #[ORM\Column(type: 'boolean')]
     private $status;
 
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Message::class)]
+    private $messages;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->bookLikes = new ArrayCollection();
         $this->subcategories = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -426,6 +430,36 @@ class Book
         return $this->title;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getBook() === $this) {
+                $message->setBook(null);
+            }
+        }
+
+        return $this;
     }
     
 }

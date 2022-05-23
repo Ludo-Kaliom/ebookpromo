@@ -1,0 +1,25 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit Message{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Editer le message</h1>
+
+        {{ include('admin/message/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a class="btn btn-secondary" href="{{ path('message_index') }}">back to list</a>
+
+        {{ include('admin/message/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+    </script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Message index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Listes des messages</h1>
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="align-middle text-center">
+            <tr>
+                <th>Id</th>
+                <th>Destinataire</th>
+                <th>Sujet</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr class="text-center">
+                <td>{{ message.id }}</td>
+                <td>{{ message.username }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.firstMessage }}</td>
+                <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ message.status ? 'En cours' : 'Fermé' }}</td>
+                <td>
+                    {% if message.status is same as true %}
+                        <a class="btn btn-primary" href="{{ path('message_show', {'id': message.id}) }}">{{ message.answers|length}} Message(s)</a>
+                        <a class="btn btn-secondary" href="{{ path('message_edit', {'id': message.id}) }}">Editer</a>
+                    {% else %}
+                        <a class="btn btn-primary disabled" href="{{ path('message_show', {'id': message.id}) }}">{{ message.answers|length}} Message(s)</a>
+                        <a class="btn btn-secondary disabled" href="{{ path('message_edit', {'id': message.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun message à traiter</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -73,6 +73,67 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <h2>Précédents échanges avec la modération</h2>
+            <div class="col">
+                <table class="table table-dark table-bordered align-middle">
+                    <thead class="align-middle text-center">
+                        <tr>
+                            <th>Date d'envoi</th>
+                            <th>Sujet</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for message in messages %}
+                            <tr class="align-middle text-center">
+                                <td>{{ message.createdAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ message.subject }}</td>
+                                <td>{{ message.status ? 'En cours' : 'Terminé' }}
+                                </td>
+                                <td>
+                                    {% if message.status is same as true %}
+                                        {% if message.answers|length == 1 %}
+                                            <a class="btn btn-secondary" href="{{ path('app_message_show',{id: message.id, slug: message.slug}) }}">{{ message.answers|length}} Message</a>
+                                        {% elseif message.answers|length >= 1 %}
+                                            <a class="btn btn-secondary" href="{{ path('app_message_show',{id: message.id, slug: message.slug}) }}">{{ message.answers|length}} Messages</a>
+                                        {% else %}
+                                            <a class="btn btn-secondary" href="{{ path('app_message_show',{id: message.id, slug: message.slug}) }}">Aucune réponse</a>
+                                        {% endif %}
+                                    {% else %}
+                                        <a class="btn btn-secondary disabled" href="">Discussion terminée</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">Aucun échange avec l'administration n'existe pour l'instant</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Avec ce formulaire, vous pouvez nous contacter directement pour nous poser des questions, remonter un problème ou un bug.<br>
+                Vous retrouver ci-dessous l'historique de vos échanges avec nous.</p>  
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    {{ form_start(formMessage) }}
+                    {{ form_row(formMessage.subject) }}
+                    {{ form_row(formMessage.book) }}
+                    {{ form_row(formMessage.firstMessage) }}
+                    {{ form_rest(formMessage) }}
+                        <button class="btn btn-primary">{{ button|default('Envoyer le message') }}</button>
+                    {{ form_end(formMessage) }}
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
