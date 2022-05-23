@@ -1,0 +1,69 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Message{% endblock %}
+
+{% block body %}
+     <div class="container">
+        <h1>Sujet : {{message.subject}}</h1>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <p>Pour rappel, premier message de la discussion :<br>
+                {{message.firstMessage|raw}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-2 text-center">
+                {% if app.user.avatar is same as(null) %}
+                    <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                {% else %}
+                    <img id="avatar" src="{{asset('/uploads/' ~ app.user.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ app.user.username }}"></br>
+                {% endif %} 
+            </div>
+            <div class="col">
+                <div class="row">
+                    {{ form_start(formAnswer) }}
+                    {{ form_row(formAnswer.message) }}
+                    {{ form_rest(formAnswer) }}
+                        <button class="btn btn-primary">{{ button|default('Envoyer le message') }}</button>
+                    {{ form_end(formAnswer) }}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <h2>Historique de la discussion</h2>
+            {% for answer in answers %}
+                <div class="col-2 text-center">
+                    {% if answer.username.avatar is same as(null) %}
+                        <img id="avatar" src="{{asset('/uploads/defaut.png')| imagine_filter('avatarbookshow')}}" alt="avatar de {{ answer.username.avatar }}"></br>
+                    {% else %}
+                        <img id="avatar" src="{{asset('/uploads/' ~ answer.username.avatar)| imagine_filter('avatarbookshow')}}" alt="avatar de {{ answer.username.avatar }}"></br>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="row">
+                            Envoyé le {{ answer.createdAt|date}}
+                        </div>
+                        <div class="row">
+                            {{answer.message|raw}}
+                        </div>
+                    </div>   
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="{{ path('message_index') }}">back to list</a>
+
+    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
+
+    {{ include('admin/message/_delete_form.html.twig') }}
+{% endblock %}
